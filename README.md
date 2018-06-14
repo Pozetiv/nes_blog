@@ -1,2 +1,4 @@
-# nes_blog
-News blog 
+NEWS BLOG
+
+CRUD functions for post 
+
