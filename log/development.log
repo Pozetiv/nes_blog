@@ -2599,3 +2599,2439 @@ Completed 200 OK in 87ms (Views: 49.4ms | ActiveRecord: 4.1ms)
   [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
   [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
   [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" ORDER BY "roles"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (652.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS "nevs_blog_development"[0m
+  [1m[35m (1253.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "nevs_blog_test"[0m
+  [1m[35m (1086.5ms)[0m  [1m[35mCREATE DATABASE "nevs_blog_development" ENCODING = 'unicode'[0m
+  [1m[35m (992.6ms)[0m  [1m[35mCREATE DATABASE "nevs_blog_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "posts" CASCADE[0m
+  [1m[35m (119.6ms)[0m  [1m[35mCREATE TABLE "posts" ("id" bigserial primary key, "user_id" integer, "title" character varying, "content" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (62.8ms)[0m  [1m[35mCREATE  INDEX  "index_posts_on_title" ON "posts"  ("title")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "roles" CASCADE[0m
+  [1m[35m (109.2ms)[0m  [1m[35mCREATE TABLE "roles" ("id" bigserial primary key, "role_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (109.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "user_name" character varying NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "roles_id" integer)[0m
+  [1m[35m (62.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (52.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35m (10.3ms)[0m  [1m[35mALTER TABLE "posts" ADD CONSTRAINT "fk_rails_5b5ddfd518"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (109.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (8.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20180616172631)[0m
+  [1m[35m (10.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20180614100953),
+(20180614103237);
+
+[0m
+  [1m[35m (109.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-06-17 18:25:57.144419"], ["updated_at", "2018-06-17 18:25:57.144419"]]
+  [1m[35m (8.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "posts" CASCADE[0m
+  [1m[35m (125.0ms)[0m  [1m[35mCREATE TABLE "posts" ("id" bigserial primary key, "user_id" integer, "title" character varying, "content" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (62.0ms)[0m  [1m[35mCREATE  INDEX  "index_posts_on_title" ON "posts"  ("title")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "roles" CASCADE[0m
+  [1m[35m (98.3ms)[0m  [1m[35mCREATE TABLE "roles" ("id" bigserial primary key, "role_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (106.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "user_name" character varying NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "roles_id" integer)[0m
+  [1m[35m (53.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (53.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mALTER TABLE "posts" ADD CONSTRAINT "fk_rails_5b5ddfd518"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (98.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (8.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20180616172631)[0m
+  [1m[35m (10.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20180614100953),
+(20180614103237);
+
+[0m
+  [1m[35m (109.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-06-17 18:25:57.943268"], ["updated_at", "2018-06-17 18:25:57.943268"]]
+  [1m[35m (6.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2018-06-17 18:25:57.954063"], ["key", "environment"]]
+  [1m[35m (6.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2561293738743026490)[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateComments (20180617182357)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (84.8ms)[0m  [1m[35mCREATE TABLE "comments" ("id" bigserial primary key, "user_id" integer, "post_id" integer, "content" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20180617182357"]]
+  [1m[35m (23.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(2561293738743026490)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/posts/new" for 127.0.0.1 at 2018-06-17 21:36:45 +0300
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 401 Unauthorized in 26ms (ActiveRecord: 5.2ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2018-06-17 21:36:45 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.3ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (43.7ms)
+  Rendered shared/_header.html.haml (2.4ms)
+  Rendered shared/_footer.html.haml (1.0ms)
+Completed 200 OK in 6353ms (Views: 6321.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/groups/new" for 127.0.0.1 at 2018-06-17 21:38:28 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/groups/new"):
+  
+actionpack (5.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.6.2) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.6.2) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.5) lib/rack/method_override.rb:22:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.6) lib/rails/engine.rb:522:in `call'
+puma (3.11.4) lib/puma/configuration.rb:225:in `call'
+puma (3.11.4) lib/puma/server.rb:632:in `handle_request'
+puma (3.11.4) lib/puma/server.rb:446:in `process_client'
+puma (3.11.4) lib/puma/server.rb:306:in `block in run'
+puma (3.11.4) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2018-06-17 21:39:37 +0300
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (uninitialized constant PostController):
+  
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:269:in `const_get'
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:269:in `block in constantize'
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:267:in `each'
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:267:in `inject'
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:267:in `constantize'
+actionpack (5.1.6) lib/action_dispatch/http/request.rb:85:in `controller_class_for'
+actionpack (5.1.6) lib/action_dispatch/http/request.rb:78:in `controller_class'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:43:in `controller'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:29:in `serve'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:33:in `each'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:33:in `serve'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:844:in `call'
+warden (1.2.7) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.7) lib/warden/manager.rb:35:in `catch'
+warden (1.2.7) lib/warden/manager.rb:35:in `call'
+rack (2.0.5) lib/rack/etag.rb:25:in `call'
+rack (2.0.5) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.5) lib/rack/head.rb:12:in `call'
+rack (2.0.5) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.5) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.1.6) lib/active_record/migration.rb:556:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+activesupport (5.1.6) lib/active_support/callbacks.rb:97:in `run_callbacks'
+actionpack (5.1.6) lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+web-console (3.6.2) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.6.2) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.5) lib/rack/method_override.rb:22:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.6) lib/rails/engine.rb:522:in `call'
+puma (3.11.4) lib/puma/configuration.rb:225:in `call'
+puma (3.11.4) lib/puma/server.rb:632:in `handle_request'
+puma (3.11.4) lib/puma/server.rb:446:in `process_client'
+puma (3.11.4) lib/puma/server.rb:306:in `block in run'
+puma (3.11.4) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2018-06-17 21:39:38 +0300
+  
+ActionController::RoutingError (uninitialized constant PostController):
+  
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:269:in `const_get'
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:269:in `block in constantize'
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:267:in `each'
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:267:in `inject'
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:267:in `constantize'
+actionpack (5.1.6) lib/action_dispatch/http/request.rb:85:in `controller_class_for'
+actionpack (5.1.6) lib/action_dispatch/http/request.rb:78:in `controller_class'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:43:in `controller'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:29:in `serve'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:33:in `each'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:33:in `serve'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:844:in `call'
+warden (1.2.7) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.7) lib/warden/manager.rb:35:in `catch'
+warden (1.2.7) lib/warden/manager.rb:35:in `call'
+rack (2.0.5) lib/rack/etag.rb:25:in `call'
+rack (2.0.5) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.5) lib/rack/head.rb:12:in `call'
+rack (2.0.5) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.5) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.1.6) lib/active_record/migration.rb:556:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+activesupport (5.1.6) lib/active_support/callbacks.rb:97:in `run_callbacks'
+actionpack (5.1.6) lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+web-console (3.6.2) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.6.2) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.5) lib/rack/method_override.rb:22:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.6) lib/rails/engine.rb:522:in `call'
+puma (3.11.4) lib/puma/configuration.rb:225:in `call'
+puma (3.11.4) lib/puma/server.rb:632:in `handle_request'
+puma (3.11.4) lib/puma/server.rb:446:in `process_client'
+puma (3.11.4) lib/puma/server.rb:306:in `block in run'
+puma (3.11.4) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2018-06-17 21:39:43 +0300
+  
+ActionController::RoutingError (uninitialized constant PostController):
+  
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:269:in `const_get'
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:269:in `block in constantize'
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:267:in `each'
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:267:in `inject'
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:267:in `constantize'
+actionpack (5.1.6) lib/action_dispatch/http/request.rb:85:in `controller_class_for'
+actionpack (5.1.6) lib/action_dispatch/http/request.rb:78:in `controller_class'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:43:in `controller'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:29:in `serve'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:33:in `each'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:33:in `serve'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:844:in `call'
+warden (1.2.7) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.7) lib/warden/manager.rb:35:in `catch'
+warden (1.2.7) lib/warden/manager.rb:35:in `call'
+rack (2.0.5) lib/rack/etag.rb:25:in `call'
+rack (2.0.5) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.5) lib/rack/head.rb:12:in `call'
+rack (2.0.5) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.5) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.1.6) lib/active_record/migration.rb:556:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+activesupport (5.1.6) lib/active_support/callbacks.rb:97:in `run_callbacks'
+actionpack (5.1.6) lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+web-console (3.6.2) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.6.2) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.5) lib/rack/method_override.rb:22:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.6) lib/rails/engine.rb:522:in `call'
+puma (3.11.4) lib/puma/configuration.rb:225:in `call'
+puma (3.11.4) lib/puma/server.rb:632:in `handle_request'
+puma (3.11.4) lib/puma/server.rb:446:in `process_client'
+puma (3.11.4) lib/puma/server.rb:306:in `block in run'
+puma (3.11.4) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2018-06-17 21:39:49 +0300
+Processing by PostsController#index as HTML
+Completed 401 Unauthorized in 6ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2018-06-17 21:39:49 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (2.1ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (51.1ms)
+  Rendered shared/_header.html.haml (2.5ms)
+  Rendered shared/_footer.html.haml (1.0ms)
+Completed 200 OK in 275ms (Views: 243.7ms | ActiveRecord: 7.9ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2018-06-17 21:39:55 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"aIPyvnV2V5YcXdmcXySBuDwfz//jm7zqoLTQWgx0Mi36uRHEfMvHhYiF2W9Gow1h7eEHTv2El8owg6xON6+EiQ==", "user"=>{"email"=>"admin", "password"=>"[FILTERED]", "remember_me"=>"1"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "admin"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 33ms (ActiveRecord: 0.8ms)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"aIPyvnV2V5YcXdmcXySBuDwfz//jm7zqoLTQWgx0Mi36uRHEfMvHhYiF2W9Gow1h7eEHTv2El8owg6xON6+EiQ==", "user"=>{"email"=>"admin", "password"=>"[FILTERED]", "remember_me"=>"1"}, "commit"=>"Log in"}
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.8ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (6.3ms)
+  Rendered shared/_header.html.haml (1.7ms)
+  Rendered shared/_footer.html.haml (0.9ms)
+Completed 200 OK in 197ms (Views: 49.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2018-06-17 21:39:57 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"j61paLdrzGQwgNty/HoSiNF1HfQqkIbvWurrfGqqHdUdl4oSvtZcd6RY24Hl/Z5RAIvVRTSPrc/K3ZdoUXGrcQ==", "user"=>{"email"=>"admin", "password"=>"[FILTERED]", "remember_me"=>"1"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "admin"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.6ms)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"j61paLdrzGQwgNty/HoSiNF1HfQqkIbvWurrfGqqHdUdl4oSvtZcd6RY24Hl/Z5RAIvVRTSPrc/K3ZdoUXGrcQ==", "user"=>{"email"=>"admin", "password"=>"[FILTERED]", "remember_me"=>"1"}, "commit"=>"Log in"}
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.8ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (7.5ms)
+  Rendered shared/_header.html.haml (1.2ms)
+  Rendered shared/_footer.html.haml (1.0ms)
+Completed 200 OK in 175ms (Views: 34.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-06-17 21:39:58 +0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.2ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (12.7ms)
+  Rendered shared/_header.html.haml (2.3ms)
+  Rendered shared/_footer.html.haml (1.9ms)
+Completed 200 OK in 64ms (Views: 63.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-06-17 21:40:08 +0300
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"eo+wdWdDVC/c/+d5IBp7gfO77x89aMqICHOw+fj+Oc4qUvp6fmBvPoOe6C0yBt8kFaBqSHNteefOX1cBhM33Yw==", "user"=>{"email"=>"admin@admin.com", "user_name"=>"admin", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "admin@admin.com"], ["LIMIT", 1]]
+  [1m[35mSQL (1.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "user_name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["email", "admin@admin.com"], ["encrypted_password", "$2a$11$Zu4Vfm7hIS31s221eOANrOQ/.JnfcW/0ebx0NdKPF533x0nDk/1Hy"], ["user_name", "admin"], ["created_at", "2018-06-17 18:40:09.134364"], ["updated_at", "2018-06-17 18:40:09.134364"]]
+  [1m[35m (20.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[33mUPDATE "users" SET "sign_in_count" = $1, "current_sign_in_at" = $2, "last_sign_in_at" = $3, "current_sign_in_ip" = $4, "last_sign_in_ip" = $5, "updated_at" = $6 WHERE "users"."id" = $7[0m  [["sign_in_count", 1], ["current_sign_in_at", "2018-06-17 18:40:09.157959"], ["last_sign_in_at", "2018-06-17 18:40:09.157959"], ["current_sign_in_ip", "127.0.0.1/32"], ["last_sign_in_ip", "127.0.0.1/32"], ["updated_at", "2018-06-17 18:40:09.159359"], ["id", 1]]
+  [1m[35m (5.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/
+Completed 302 Found in 186ms (ActiveRecord: 28.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 21:40:09 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (3.1ms)
+  Rendered shared/_header.html.haml (2.1ms)
+  Rendered shared/_footer.html.haml (2.1ms)
+Completed 200 OK in 60ms (Views: 45.6ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 21:40:31 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (3.0ms)
+  Rendered shared/_header.html.haml (1.2ms)
+  Rendered shared/_footer.html.haml (1.1ms)
+Completed 200 OK in 55ms (Views: 50.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 21:40:54 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.8ms)
+  Rendered shared/_header.html.haml (1.3ms)
+  Rendered shared/_footer.html.haml (1.0ms)
+Completed 200 OK in 35ms (Views: 31.6ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 21:41:12 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.5ms)
+  Rendered shared/_header.html.haml (2.7ms)
+  Rendered shared/_footer.html.haml (0.9ms)
+Completed 200 OK in 32ms (Views: 29.3ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2018-06-17 21:50:26 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"w9xVpmOhkH1fJ4+W5/bUHNS7lEMAe6cYQFVs7sLM/gNR5rbcahwAbsv/j2X+cVjFBUVc8h5kjDjQYhD6+RdIpw==", "user"=>{"email"=>"admin", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://0.0.0.0:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 3ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 21:50:26 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.6ms)
+  Rendered shared/_header.html.haml (1.4ms)
+Completed 500 Internal Server Error in 31ms (ActiveRecord: 0.3ms)
+
+
+  
+ActionView::Template::Error (Illegal nesting: content can't be both given on the same line as %button and nested within it.):
+    1: %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    2:   =link_to 'Poster', root_path, class: 'navbar-brand'
+    3:   %button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    4:     %span.navbar-toggler-icon
+    5:   .collapse.navbar-collapse#navbarSupportedContent
+    6:     %ul.navbar-nav.mr-auto
+    7:       %li.nav-item.active
+  
+app/views/shared/_header.html.haml:4
+app/views/layouts/application.html.erb:13:in `_app_views_layouts_application_html_erb___3349023808748590216_69849904163140'
+Started GET "/" for 127.0.0.1 at 2018-06-17 21:54:12 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.2ms)
+  Rendered shared/_header.html.haml (2.9ms)
+Completed 500 Internal Server Error in 35ms (ActiveRecord: 0.3ms)
+
+
+  
+SyntaxError (/home/roman/work/news_blog/app/views/shared/_header.html.haml:3: syntax error, unexpected ':', expecting =>
+...l, type: "button", data-toggle: "collapse", data-target: "#n...
+...                              ^
+/home/roman/work/news_blog/app/views/shared/_header.html.haml:3: syntax error, unexpected ',', expecting ')'
+...tton", data-toggle: "collapse", data-target: "#navbarSupport...
+...                              ^
+/home/roman/work/news_blog/app/views/shared/_header.html.haml:3: syntax error, unexpected ':', expecting ')'
+...oggle: "collapse", data-target: "#navbarSupportedContent",  ...
+...                              ^
+/home/roman/work/news_blog/app/views/shared/_header.html.haml:3: syntax error, unexpected ',', expecting ')'
+...get: "#navbarSupportedContent",  aria-controls: "navbarSuppo...
+...                              ^
+/home/roman/work/news_blog/app/views/shared/_header.html.haml:3: syntax error, unexpected ':', expecting ')'
+...portedContent",  aria-controls: "navbarSupportedContent", ar...
+...                              ^
+/home/roman/work/news_blog/app/views/shared/_header.html.haml:3: syntax error, unexpected ',', expecting ')'
+...rols: "navbarSupportedContent", aria-expanded: "false", aria...
+...                              ^
+/home/roman/work/news_blog/app/views/shared/_header.html.haml:3: syntax error, unexpected ':', expecting ')'
+...pportedContent", aria-expanded: "false", aria-label: "Toggle...
+...                              ^
+/home/roman/work/news_blog/app/views/shared/_header.html.haml:3: syntax error, unexpected ',', expecting ')'
+...ntent", aria-expanded: "false", aria-label: "Toggle navigati...
+...                              ^
+/home/roman/work/news_blog/app/views/shared/_header.html.haml:3: syntax error, unexpected ':', expecting ')'
+...-expanded: "false", aria-label: "Toggle navigation")).to_s);...
+...                              ^
+/home/roman/work/news_blog/app/views/shared/_header.html.haml:3: syntax error, unexpected ')', expecting keyword_end
+...el: "Toggle navigation")).to_s);; _hamlout.buffer << (">\n<s...
+...                              ^):
+  
+app/views/shared/_header.html.haml:3: syntax error, unexpected ':', expecting =>
+app/views/shared/_header.html.haml:3: syntax error, unexpected ',', expecting ')'
+app/views/shared/_header.html.haml:3: syntax error, unexpected ':', expecting ')'
+app/views/shared/_header.html.haml:3: syntax error, unexpected ',', expecting ')'
+app/views/shared/_header.html.haml:3: syntax error, unexpected ':', expecting ')'
+app/views/shared/_header.html.haml:3: syntax error, unexpected ',', expecting ')'
+app/views/shared/_header.html.haml:3: syntax error, unexpected ':', expecting ')'
+app/views/shared/_header.html.haml:3: syntax error, unexpected ',', expecting ')'
+app/views/shared/_header.html.haml:3: syntax error, unexpected ':', expecting ')'
+app/views/shared/_header.html.haml:3: syntax error, unexpected ')', expecting keyword_end
+app/views/layouts/application.html.erb:13:in `_app_views_layouts_application_html_erb___3349023808748590216_47061797803100'
+Started GET "/" for 127.0.0.1 at 2018-06-17 21:59:58 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (2.0ms)
+  [1m[36mPost Load (0.8ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  Rendered shared/_header.html.erb (271.5ms)
+Completed 500 Internal Server Error in 302ms (ActiveRecord: 4.0ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `new_user_registration' for #<#<Class:0x00007f0e64ec0670>:0x00007f0e65c73c40>
+Did you mean?  new_user_registration_url
+               new_user_registration_path):
+     7:   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+     8:     <ul class="navbar-nav mr-auto">
+     9:       <li class="nav-item active">
+    10:         <%= link_to "Sign UP", new_user_registration %>
+    11:       </li>
+    12:     </ul>
+    13:   </div>
+  
+app/views/shared/_header.html.erb:10:in `_app_views_shared__header_html_erb___1372281291996979105_69849903232240'
+app/views/layouts/application.html.erb:13:in `_app_views_layouts_application_html_erb___3349023808748590216_69849906904340'
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:06:40 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.9ms)
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  Rendered shared/_header.html.erb (271.0ms)
+Completed 500 Internal Server Error in 301ms (ActiveRecord: 1.0ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `new_user_registration' for #<#<Class:0x00007f0e64ec0670>:0x00007f0e7034de58>
+Did you mean?  new_user_registration_url
+               new_user_registration_path):
+     7:   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+     8:     <ul class="navbar-nav mr-auto">
+     9:       <li class="nav-item active">
+    10:         <%= link_to "Sign UP", new_user_registration %>
+    11:       </li>
+    12:     </ul>
+    13:   </div>
+  
+app/views/shared/_header.html.erb:10:in `_app_views_shared__header_html_erb___1372281291996979105_69849911087300'
+app/views/layouts/application.html.erb:13:in `_app_views_layouts_application_html_erb___3349023808748590216_69849994382460'
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:06:58 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.7ms)
+  Rendered shared/_header.html.erb (0.5ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 32ms (Views: 28.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:07:35 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (2.1ms)
+  Rendered shared/_header.html.erb (0.6ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 32ms (Views: 28.7ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:08:11 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (2.1ms)
+  Rendered shared/_header.html.erb (0.6ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 33ms (Views: 29.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:15:57 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.7ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 37ms (Views: 33.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:16:52 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.6ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 32ms (Views: 28.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:16:53 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (2.1ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 33ms (Views: 29.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:17:05 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (2.0ms)
+  Rendered shared/_header.html.erb (0.6ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 33ms (Views: 29.6ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:24:18 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.7ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 32ms (Views: 28.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:24:19 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.4ms)
+  Rendered shared/_header.html.erb (0.9ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 37ms (Views: 34.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:24:20 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.8ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 34ms (Views: 31.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:24:20 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.8ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 32ms (Views: 28.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:24:21 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (2.0ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 31ms (Views: 28.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:24:42 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.4ms)
+  Rendered shared/_header.html.erb (0.9ms)
+  Rendered shared/_footer.html.erb (0.3ms)
+Completed 200 OK in 40ms (Views: 37.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:24:43 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.5ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 38ms (Views: 34.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:25:01 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.6ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 30ms (Views: 26.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:25:02 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.5ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 35ms (Views: 32.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:25:03 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.6ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 32ms (Views: 29.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:25:03 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.8ms)
+  Rendered shared/_header.html.erb (1.0ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 40ms (Views: 37.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:25:03 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.5ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 34ms (Views: 30.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:25:05 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.7ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 36ms (Views: 32.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:25:43 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.7ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 31ms (Views: 28.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:25:45 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.6ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 34ms (Views: 31.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:26:28 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (8.4ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 37ms (Views: 34.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:26:29 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.4ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 30ms (Views: 27.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:26:29 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.6ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 31ms (Views: 28.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:26:30 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.6ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 32ms (Views: 29.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:26:30 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.5ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 39ms (Views: 36.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:26:30 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.7ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 33ms (Views: 30.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:26:48 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.9ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 32ms (Views: 28.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:26:49 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.4ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 34ms (Views: 31.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:26:49 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.6ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 38ms (Views: 35.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:26:50 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.7ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 34ms (Views: 30.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:30:18 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.4ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 29ms (Views: 26.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:30:19 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.5ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 30ms (Views: 27.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:30:20 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.4ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 33ms (Views: 29.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:35:13 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (8.4ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 96ms (Views: 92.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:36:33 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.9ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 30ms (Views: 26.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:36:38 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (1.6ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 29ms (Views: 25.5ms | ActiveRecord: 0.6ms)
+
+
+  [1m[36mPost Load (0.8ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:40:23 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (2.8ms)
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.5ms)
+
+
+  
+ActionView::Template::Error ('nil' is not an ActiveModel-compatible object. It must implement :to_partial_path.):
+    1: index
+    2: =render @post
+  
+app/views/posts/index.html.haml:2:in `_app_views_posts_index_html_haml__4079873317161219346_69849895305980'
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:41:01 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (4.4ms)
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.5ms)
+
+
+  
+ActionView::Template::Error (Missing partial posts/_@post, application/_@post with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder, :haml]}. Searched in:
+  * "/home/roman/work/news_blog/app/views"
+  * "/home/roman/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/devise-4.4.3/app/views"
+):
+    1: index
+    2: =render "@post"
+  
+app/views/posts/index.html.haml:2:in `_app_views_posts_index_html_haml__4079873317161219346_69849895147020'
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:46:08 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (8.9ms)
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.4ms)
+
+
+  
+ActionView::Template::Error (You invoked render but did not give any of :partial, :template, :inline, :file, :plain, :html or :body option.):
+    1: index
+    2: =render patrial: @post
+  
+app/views/posts/index.html.haml:2:in `_app_views_posts_index_html_haml__4079873317161219346_47061788059600'
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:46:53 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (2.7ms)
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.5ms)
+
+
+  
+ActionView::Template::Error (You invoked render but did not give any of :partial, :template, :inline, :file, :plain, :html or :body option.):
+    1: index
+    2: =render patrial: @post
+  
+app/views/posts/index.html.haml:2:in `_app_views_posts_index_html_haml__4079873317161219346_69849994169200'
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:46:54 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (2.9ms)
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.6ms)
+
+
+  
+ActionView::Template::Error (You invoked render but did not give any of :partial, :template, :inline, :file, :plain, :html or :body option.):
+    1: index
+    2: =render patrial: @post
+  
+app/views/posts/index.html.haml:2:in `_app_views_posts_index_html_haml__4079873317161219346_69849909483720'
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:46:55 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (2.8ms)
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.6ms)
+
+
+  
+ActionView::Template::Error (You invoked render but did not give any of :partial, :template, :inline, :file, :plain, :html or :body option.):
+    1: index
+    2: =render patrial: @post
+  
+app/views/posts/index.html.haml:2:in `_app_views_posts_index_html_haml__4079873317161219346_69849911056580'
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:46:55 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (2.8ms)
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.5ms)
+
+
+  
+ActionView::Template::Error (You invoked render but did not give any of :partial, :template, :inline, :file, :plain, :html or :body option.):
+    1: index
+    2: =render patrial: @post
+  
+app/views/posts/index.html.haml:2:in `_app_views_posts_index_html_haml__4079873317161219346_69849993585520'
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:47:23 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (3.4ms)
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.5ms)
+
+
+  
+ActionView::Template::Error ('nil' is not an ActiveModel-compatible object. It must implement :to_partial_path.):
+    1: index
+    2: =render partial: @post
+  
+app/views/posts/index.html.haml:2:in `_app_views_posts_index_html_haml__4079873317161219346_69849992920320'
+Started GET "/" for 127.0.0.1 at 2018-06-17 22:47:24 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (2.6ms)
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.5ms)
+
+
+  
+ActionView::Template::Error ('nil' is not an ActiveModel-compatible object. It must implement :to_partial_path.):
+    1: index
+    2: =render partial: @post
+  
+app/views/posts/index.html.haml:2:in `_app_views_posts_index_html_haml__4079873317161219346_69849993590460'
+Started GET "/groups/new" for 127.0.0.1 at 2018-06-18 08:56:12 +0300
+  [1m[35m (22.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/groups/new"):
+  
+actionpack (5.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.6.2) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.6.2) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.5) lib/rack/method_override.rb:22:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.6) lib/rails/engine.rb:522:in `call'
+puma (3.11.4) lib/puma/configuration.rb:225:in `call'
+puma (3.11.4) lib/puma/server.rb:632:in `handle_request'
+puma (3.11.4) lib/puma/server.rb:446:in `process_client'
+puma (3.11.4) lib/puma/server.rb:306:in `block in run'
+puma (3.11.4) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2018-06-18 08:56:17 +0300
+Processing by PostsController#index as HTML
+Completed 401 Unauthorized in 17ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2018-06-18 08:56:17 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.3ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (109.6ms)
+  Rendered shared/_header.html.erb (0.9ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 1085ms (Views: 942.5ms | ActiveRecord: 86.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2018-06-18 08:56:21 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0pTz+bEcUpKQY7naFK1FhegYtR5xL8O2jj/Uu7OKgGkDqSG0/X6DyIp5c+pk3uuyqQfMuYpDB5jsYPukdQ7azw==", "user"=>{"email"=>"admin", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (177.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "admin"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 200ms (ActiveRecord: 177.9ms)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0pTz+bEcUpKQY7naFK1FhegYtR5xL8O2jj/Uu7OKgGkDqSG0/X6DyIp5c+pk3uuyqQfMuYpDB5jsYPukdQ7azw==", "user"=>{"email"=>"admin", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (7.6ms)
+  Rendered shared/_header.html.erb (1.7ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 352ms (Views: 37.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2018-06-18 08:56:59 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"TmhVwS3ai6r4dl1Pu7whxmvhCtBn/EZuX7g55NRQS0afVYeMYbha8OJsl3/Lz4/xKv5zd5yQgkA95xb7EtQR4A==", "user"=>{"email"=>"admin", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "admin"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.4ms)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"TmhVwS3ai6r4dl1Pu7whxmvhCtBn/EZuX7g55NRQS0afVYeMYbha8OJsl3/Lz4/xKv5zd5yQgkA95xb7EtQR4A==", "user"=>{"email"=>"admin", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (13.3ms)
+  Rendered shared/_header.html.erb (1.3ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 201ms (Views: 56.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2018-06-18 08:57:05 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"wUaGiBTA1uHeSfW9LsJba71I61iceBW9UjWvzdVLglwQe1TFWKIHu8RTP41esfVc/FeS/2cU0ZMwaoDSE8/Y+g==", "user"=>{"email"=>"admin", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "admin"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.5ms)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"wUaGiBTA1uHeSfW9LsJba71I61iceBW9UjWvzdVLglwQe1TFWKIHu8RTP41esfVc/FeS/2cU0ZMwaoDSE8/Y+g==", "user"=>{"email"=>"admin", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (2.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (11.9ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.1ms)
+Completed 200 OK in 194ms (Views: 49.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2018-06-18 08:57:08 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FpY8xMAS22xNBUTlR9TmS/vUBz61biVb4fyLaQQNncPHq+6JjHAKNlcfjtU3p0h8ust+mU4C4XWDo6R2wonHZQ==", "user"=>{"email"=>"admin@admin.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (31.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "admin@admin.com"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (26.4ms)[0m  [1m[33mUPDATE "users" SET "current_sign_in_at" = $1, "sign_in_count" = $2, "updated_at" = $3 WHERE "users"."id" = $4[0m  [["current_sign_in_at", "2018-06-18 05:57:09.153135"], ["sign_in_count", 2], ["updated_at", "2018-06-18 05:57:09.154343"], ["id", 1]]
+  [1m[35m (24.8ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/
+Completed 302 Found in 258ms (ActiveRecord: 82.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-18 08:57:09 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  Rendered posts/index.html.haml within layouts/application (4.0ms)
+Completed 500 Internal Server Error in 58ms (ActiveRecord: 0.5ms)
+
+
+  
+ActionView::Template::Error ('nil' is not an ActiveModel-compatible object. It must implement :to_partial_path.):
+    1: index
+    2: =render partial: @post
+  
+app/views/posts/index.html.haml:2:in `_app_views_posts_index_html_haml__3472643119835308396_70217128665580'
+Started GET "/" for 127.0.0.1 at 2018-06-18 09:18:42 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (21.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered collection of templates [0 times] (0.0ms)
+  Rendered posts/index.html.haml within layouts/application (26.1ms)
+  Rendered shared/_header.html.erb (0.9ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 87ms (Views: 61.8ms | ActiveRecord: 23.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-18 09:19:22 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered collection of templates [0 times] (0.0ms)
+  Rendered posts/index.html.haml within layouts/application (2.8ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 33ms (Views: 29.5ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-18 09:19:23 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered collection of templates [0 times] (0.0ms)
+  Rendered posts/index.html.haml within layouts/application (3.5ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 40ms (Views: 35.4ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-18 09:19:24 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered collection of templates [0 times] (0.0ms)
+  Rendered posts/index.html.haml within layouts/application (2.9ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 32ms (Views: 27.8ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2018-06-18 09:19:24 +0300
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/new.html.haml within layouts/application
+  Rendered posts/_form.html.haml (28.6ms)
+  Rendered posts/new.html.haml within layouts/application (31.8ms)
+  Rendered shared/_header.html.erb (0.9ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 87ms (Views: 57.0ms | ActiveRecord: 2.1ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2018-06-18 09:19:30 +0300
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"jpwtYzPiqKNjN1xDL3CaEB4wfU4vtG436/sjwJ6bNpgz3DvEA6PPUsHg0GR/gjIFXC1wvWLcrYvkPpt901IeHQ==", "post"=>{"title"=>"ff", "content"=>"ff"}, "commit"=>"Create Post"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (154.5ms)[0m  [1m[32mINSERT INTO "posts" ("user_id", "title", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 1], ["title", "ff"], ["content", "ff"], ["created_at", "2018-06-18 06:19:30.990989"], ["updated_at", "2018-06-18 06:19:30.990989"]]
+  [1m[35m (42.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/posts/1
+Completed 302 Found in 273ms (ActiveRecord: 198.0ms)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 09:19:31 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 58ms (ActiveRecord: 1.2ms)
+
+
+  
+ArgumentError (Range unspecified. Specify the :in, :within, :maximum, :minimum, or :is option.):
+  
+app/models/comment.rb:4:in `<class:Comment>'
+app/models/comment.rb:1:in `<top (required)>'
+app/controllers/posts_controller.rb:34:in `show'
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 09:20:29 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered posts/show.html.haml within layouts/application (2.4ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 117ms (Views: 29.6ms | ActiveRecord: 18.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-18 09:20:32 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered posts/index.html.haml within layouts/application (4.2ms)
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.8ms)
+
+
+  
+ActionView::Template::Error (Missing partial posts/_post with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder, :haml]}. Searched in:
+  * "/home/roman/work/news_blog/app/views"
+  * "/home/roman/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/devise-4.4.3/app/views"
+):
+    1: index
+    2: =render  @posts
+  
+app/views/posts/index.html.haml:2:in `_app_views_posts_index_html_haml__3472643119835308396_47078183056780'
+Started GET "/" for 127.0.0.1 at 2018-06-18 09:20:38 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered posts/index.html.haml within layouts/application (4.8ms)
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.9ms)
+
+
+  
+ActionView::Template::Error (Missing partial posts/_post with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder, :haml]}. Searched in:
+  * "/home/roman/work/news_blog/app/views"
+  * "/home/roman/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/devise-4.4.3/app/views"
+):
+    1: index
+    2: =render  @posts
+  
+app/views/posts/index.html.haml:2:in `_app_views_posts_index_html_haml__3472643119835308396_70217180347980'
+Started GET "/" for 127.0.0.1 at 2018-06-18 09:20:39 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered posts/index.html.haml within layouts/application (4.0ms)
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 1.1ms)
+
+
+  
+ActionView::Template::Error (Missing partial posts/_post with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder, :haml]}. Searched in:
+  * "/home/roman/work/news_blog/app/views"
+  * "/home/roman/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/devise-4.4.3/app/views"
+):
+    1: index
+    2: =render  @posts
+  
+app/views/posts/index.html.haml:2:in `_app_views_posts_index_html_haml__3472643119835308396_70217279738600'
+Started GET "/" for 127.0.0.1 at 2018-06-18 09:21:25 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered collection of posts/_post.html.haml [1 times] (1.6ms)
+  Rendered posts/index.html.haml within layouts/application (5.2ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 39ms (Views: 34.9ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-18 09:21:26 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered collection of posts/_post.html.haml [1 times] (1.5ms)
+  Rendered posts/index.html.haml within layouts/application (4.6ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 31ms (Views: 28.0ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2018-06-18 09:21:27 +0300
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/new.html.haml within layouts/application
+  Rendered posts/_form.html.haml (7.9ms)
+  Rendered posts/new.html.haml within layouts/application (10.2ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.3ms)
+Completed 200 OK in 41ms (Views: 37.7ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2018-06-18 09:21:30 +0300
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"anPh/o2GW7Qv+iqeZkEAmOE+2FVaf3IenutSVfRfDejXM/dZvcc8RY0tprk2s6iNoyPVphcXsaKRLurouZYlbQ==", "post"=>{"title"=>"ss", "content"=>"sss"}, "commit"=>"Create Post"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "posts" ("user_id", "title", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 1], ["title", "ss"], ["content", "sss"], ["created_at", "2018-06-18 06:21:30.593935"], ["updated_at", "2018-06-18 06:21:30.593935"]]
+  [1m[35m (59.3ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/posts/2
+Completed 302 Found in 67ms (ActiveRecord: 60.2ms)
+
+
+Started GET "/posts/2" for 127.0.0.1 at 2018-06-18 09:21:30 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered posts/show.html.haml within layouts/application (1.2ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 28ms (Views: 23.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-18 09:21:32 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered collection of posts/_post.html.haml [2 times] (1.6ms)
+  Rendered posts/index.html.haml within layouts/application (5.1ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 34ms (Views: 30.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2018-06-18 09:21:36 +0300
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/new.html.haml within layouts/application
+  Rendered posts/_form.html.haml (6.8ms)
+  Rendered posts/new.html.haml within layouts/application (9.0ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 36ms (Views: 33.3ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2018-06-18 09:21:39 +0300
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"OYB/RxJP0/XnCCr36rlQGL7B4Husw8eC4N7nQQB2tVSEwGngIg60BEXfptC6S/gN/NztiOGrBD7vG1/8Tb+d0Q==", "post"=>{"title"=>"tt", "content"=>"tt"}, "commit"=>"Create Post"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "posts" ("user_id", "title", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 1], ["title", "tt"], ["content", "tt"], ["created_at", "2018-06-18 06:21:39.749956"], ["updated_at", "2018-06-18 06:21:39.749956"]]
+  [1m[35m (38.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/posts/3
+Completed 302 Found in 45ms (ActiveRecord: 39.2ms)
+
+
+Started GET "/posts/3" for 127.0.0.1 at 2018-06-18 09:21:39 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered posts/show.html.haml within layouts/application (1.8ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 32ms (Views: 27.4ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-18 09:21:41 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered collection of posts/_post.html.haml [3 times] (1.8ms)
+  Rendered posts/index.html.haml within layouts/application (5.3ms)
+  Rendered shared/_header.html.erb (0.9ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 35ms (Views: 31.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-18 09:21:53 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered collection of posts/_post.html.haml [3 times] (2.0ms)
+  Rendered posts/index.html.haml within layouts/application (5.6ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 35ms (Views: 30.6ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-18 09:21:54 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered collection of posts/_post.html.haml [3 times] (1.6ms)
+  Rendered posts/index.html.haml within layouts/application (4.7ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 50ms (Views: 47.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-18 09:24:54 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered collection of posts/_post.html.haml [3 times] (1.8ms)
+  Rendered posts/index.html.haml within layouts/application (5.8ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 33ms (Views: 29.4ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/posts/%23%3CPost::ActiveRecord_Relation:0x00007fb9786f57c8%3E" for 127.0.0.1 at 2018-06-18 09:24:55 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"#<Post::ActiveRecord_Relation:0x00007fb9786f57c8>"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+Completed 404 Not Found in 2ms (ActiveRecord: 0.3ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Post with 'id'=#<Post::ActiveRecord_Relation:0x00007fb9786f57c8>):
+  
+app/controllers/posts_controller.rb:49:in `find_post'
+Started GET "/" for 127.0.0.1 at 2018-06-18 09:25:14 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered collection of posts/_post.html.haml [3 times] (1.7ms)
+  Rendered posts/index.html.haml within layouts/application (4.3ms)
+  Rendered shared/_header.html.erb (0.9ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 30ms (Views: 27.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-18 09:25:14 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered collection of posts/_post.html.haml [3 times] (2.1ms)
+  Rendered posts/index.html.haml within layouts/application (6.1ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.3ms)
+Completed 200 OK in 34ms (Views: 30.6ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-18 09:25:15 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered collection of posts/_post.html.haml [3 times] (1.8ms)
+  Rendered posts/index.html.haml within layouts/application (5.7ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 33ms (Views: 29.2ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 09:25:16 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered posts/show.html.haml within layouts/application (1.6ms)
+  Rendered shared/_header.html.erb (1.0ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 33ms (Views: 28.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/posts/2" for 127.0.0.1 at 2018-06-18 09:25:18 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered posts/show.html.haml within layouts/application (1.4ms)
+  Rendered shared/_header.html.erb (0.9ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 31ms (Views: 26.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/posts/3" for 127.0.0.1 at 2018-06-18 09:25:20 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered posts/show.html.haml within layouts/application (1.7ms)
+  Rendered shared/_header.html.erb (0.9ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 41ms (Views: 36.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-18 09:27:07 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered collection of posts/_post.html.haml [3 times] (2.1ms)
+  Rendered posts/index.html.haml within layouts/application (6.1ms)
+  Rendered shared/_header.html.erb (0.9ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 37ms (Views: 32.6ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2018-06-18 09:27:10 +0300
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/new.html.haml within layouts/application
+  Rendered posts/_form.html.haml (7.2ms)
+  Rendered posts/new.html.haml within layouts/application (10.0ms)
+  Rendered shared/_header.html.erb (0.9ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 37ms (Views: 33.8ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2018-06-18 09:27:17 +0300
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"dzkHc2PzC0IGKZY1mha4i7aVbbX9RPOK4/QMDkwWBDDKeRHUU7Jss6T+GhLK5BCe9IhgRrAsMDbsMbSzAd8stQ==", "post"=>{"title"=>"fs", "content"=>"fs"}, "commit"=>"Create Post"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "posts" ("user_id", "title", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 1], ["title", "fs"], ["content", "fs"], ["created_at", "2018-06-18 06:27:17.444146"], ["updated_at", "2018-06-18 06:27:17.444146"]]
+  [1m[35m (45.7ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/posts/4
+Completed 302 Found in 52ms (ActiveRecord: 46.7ms)
+
+
+Started GET "/posts/4" for 127.0.0.1 at 2018-06-18 09:27:17 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered posts/show.html.haml within layouts/application (1.3ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 29ms (Views: 25.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2018-06-18 09:27:19 +0300
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/new.html.haml within layouts/application
+  Rendered posts/_form.html.haml (7.4ms)
+  Rendered posts/new.html.haml within layouts/application (9.4ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 38ms (Views: 35.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2018-06-18 09:27:22 +0300
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"tEW/62VX/Oi+OsTd+pjWIq2A3ukluvdjrRqXgxg/c5EJBalMVRabGRztSPqqan43753TGmjSNN+i3y8+VfZbFA==", "post"=>{"title"=>"ff", "content"=>"ff"}, "commit"=>"Create Post"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "posts" ("user_id", "title", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 1], ["title", "ff"], ["content", "ff"], ["created_at", "2018-06-18 06:27:22.996477"], ["updated_at", "2018-06-18 06:27:22.996477"]]
+  [1m[35m (51.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/posts/5
+Completed 302 Found in 58ms (ActiveRecord: 52.6ms)
+
+
+Started GET "/posts/5" for 127.0.0.1 at 2018-06-18 09:27:23 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered posts/show.html.haml within layouts/application (1.8ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 32ms (Views: 27.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-18 09:27:23 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered collection of posts/_post.html.haml [5 times] (2.5ms)
+  Rendered posts/index.html.haml within layouts/application (6.4ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 35ms (Views: 31.4ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 09:29:23 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered posts/show.html.haml within layouts/application (1.7ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 32ms (Views: 26.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 09:37:12 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered posts/show.html.haml within layouts/application (4.9ms)
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 0.9ms)
+
+
+  
+ActionView::Template::Error (can't write unknown attribute `builder`):
+    4: 
+    5: 
+    6: %h1 Comments
+    7: =simple_form_for(@post, @post.comments.build) do |f|
+    8:   =f.input :content
+    9:   =f.button :submit
+  
+app/views/posts/show.html.haml:7:in `_app_views_posts_show_html_haml___3418504315683724662_70217120828260'
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 09:39:38 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered posts/show.html.haml within layouts/application (5.5ms)
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.9ms)
+
+
+  
+ActionView::Template::Error (can't write unknown attribute `builder`):
+     5: 
+     6: %h1 Comments
+     7: 
+     8: =simple_form_for(@post, @post.comments.build) do |f|
+     9:   =f.input :content
+    10:   =f.button :submit
+  
+app/views/posts/show.html.haml:8:in `_app_views_posts_show_html_haml___3418504315683724662_70217184314160'
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 09:39:40 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered posts/show.html.haml within layouts/application (2.8ms)
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.6ms)
+
+
+  
+ActionView::Template::Error (can't write unknown attribute `builder`):
+     5: 
+     6: %h1 Comments
+     7: 
+     8: =simple_form_for(@post, @post.comments.build) do |f|
+     9:   =f.input :content
+    10:   =f.button :submit
+  
+app/views/posts/show.html.haml:8:in `_app_views_posts_show_html_haml___3418504315683724662_70217125925380'
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 09:39:41 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered posts/show.html.haml within layouts/application (3.8ms)
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.8ms)
+
+
+  
+ActionView::Template::Error (can't write unknown attribute `builder`):
+     5: 
+     6: %h1 Comments
+     7: 
+     8: =simple_form_for(@post, @post.comments.build) do |f|
+     9:   =f.input :content
+    10:   =f.button :submit
+  
+app/views/posts/show.html.haml:8:in `_app_views_posts_show_html_haml___3418504315683724662_70217281371220'
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 09:50:04 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered posts/show.html.haml within layouts/application (4.0ms)
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.8ms)
+
+
+  
+ActionView::Template::Error (can't write unknown attribute `builder`):
+     5: 
+     6: %h1 Comments
+     7: 
+     8: =simple_form_for(@post, @post.comments.build) do |f|
+     9:   =f.input :content
+    10:   =f.button :submit
+  
+app/views/posts/show.html.haml:8:in `_app_views_posts_show_html_haml___3418504315683724662_70217280322280'
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 09:50:05 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered posts/show.html.haml within layouts/application (3.5ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.7ms)
+
+
+  
+ActionView::Template::Error (can't write unknown attribute `builder`):
+     5: 
+     6: %h1 Comments
+     7: 
+     8: =simple_form_for(@post, @post.comments.build) do |f|
+     9:   =f.input :content
+    10:   =f.button :submit
+  
+app/views/posts/show.html.haml:8:in `_app_views_posts_show_html_haml___3418504315683724662_70217282780400'
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 09:50:48 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered posts/show.html.haml within layouts/application (5.8ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 36ms (Views: 30.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 09:51:27 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered posts/show.html.haml within layouts/application (4.3ms)
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.9ms)
+
+
+  
+ActionView::Template::Error (Missing partial comments/_new with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder, :haml]}. Searched in:
+  * "/home/roman/work/news_blog/app/views"
+  * "/home/roman/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/devise-4.4.3/app/views"
+):
+    5: 
+    6: %h1 Comments
+    7: 
+    8: =render 'comments/new'
+  
+app/views/posts/show.html.haml:8:in `_app_views_posts_show_html_haml___3418504315683724662_70217129523100'
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 09:52:22 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered posts/show.html.haml within layouts/application (3.6ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.8ms)
+
+
+  
+ActionView::Template::Error (Missing partial comments/_new with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder, :haml]}. Searched in:
+  * "/home/roman/work/news_blog/app/views"
+  * "/home/roman/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/devise-4.4.3/app/views"
+):
+    5: 
+    6: %h1 Comments
+    7: 
+    8: =render 'comments/new'
+  
+app/views/posts/show.html.haml:8:in `_app_views_posts_show_html_haml___3418504315683724662_70217281767120'
+Started GET "/" for 127.0.0.1 at 2018-06-18 10:26:27 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered collection of posts/_post.html.haml [5 times] (2.4ms)
+  Rendered posts/index.html.haml within layouts/application (6.5ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.4ms)
+Completed 200 OK in 5112ms (Views: 5108.0ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/posts/4" for 127.0.0.1 at 2018-06-18 10:26:40 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered posts/show.html.haml within layouts/application (3.7ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.5ms)
+
+
+  
+ActionView::Template::Error (Missing partial comments/_new with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder, :haml]}. Searched in:
+  * "/home/roman/work/news_blog/app/views"
+  * "/home/roman/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/devise-4.4.3/app/views"
+):
+    5: 
+    6: %h1 Comments
+    7: 
+    8: =render 'comments/new'
+  
+app/views/posts/show.html.haml:8:in `_app_views_posts_show_html_haml___3418504315683724662_70217147953160'
+Started GET "/posts/4" for 127.0.0.1 at 2018-06-18 10:28:29 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered posts/show.html.haml within layouts/application (4.1ms)
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 0.7ms)
+
+
+  
+ActionView::Template::Error (Missing partial comments/_new with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder, :haml]}. Searched in:
+  * "/home/roman/work/news_blog/app/views"
+  * "/home/roman/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/devise-4.4.3/app/views"
+):
+    5: 
+    6: %h1 Comments
+    7: 
+    8: =render "comments/new"
+  
+app/views/posts/show.html.haml:8:in `_app_views_posts_show_html_haml___3418504315683724662_70217291157120'
+Started GET "/posts/4" for 127.0.0.1 at 2018-06-18 10:29:25 +0300
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mPost Load (0.7ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered posts/show.html.haml within layouts/application (7.4ms)
+Completed 500 Internal Server Error in 113ms (ActiveRecord: 18.9ms)
+
+
+  
+ActionView::Template::Error (Missing partial comments/_new with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder, :haml]}. Searched in:
+  * "/home/roman/work/news_blog/app/views"
+  * "/home/roman/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/devise-4.4.3/app/views"
+):
+    5: 
+    6: %h1 Comments
+    7: 
+    8: =render "comments/new"
+  
+app/views/posts/show.html.haml:8:in `_app_views_posts_show_html_haml___669803207461109122_47441827402700'
+Started GET "/posts/4" for 127.0.0.1 at 2018-06-18 10:29:28 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered posts/show.html.haml within layouts/application (3.6ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.8ms)
+
+
+  
+ActionView::Template::Error (Missing partial comments/_new with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder, :haml]}. Searched in:
+  * "/home/roman/work/news_blog/app/views"
+  * "/home/roman/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/devise-4.4.3/app/views"
+):
+    5: 
+    6: %h1 Comments
+    7: 
+    8: =render "comments/new"
+  
+app/views/posts/show.html.haml:8:in `_app_views_posts_show_html_haml___669803207461109122_47441842229720'
+Started GET "/posts/4" for 127.0.0.1 at 2018-06-18 10:30:48 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered comments/_new.html.haml (36.2ms)
+  Rendered posts/show.html.haml within layouts/application (39.1ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 299ms (Views: 293.5ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/posts/4/comments" for 127.0.0.1 at 2018-06-18 10:30:52 +0300
+Processing by CommentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"EB3mSHLyugvmSLfiXIRw9La5ITYbkpq8DORk5hS4Ethnn/kiSoWqo3hZqTmG3RJbzFirVMx4OXCid76yUrEGbw==", "comment"=>{"content"=>"asdadas"}, "commit"=>"Create Comment", "post_id"=>"4"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (36.5ms)[0m  [1m[32mINSERT INTO "comments" ("user_id", "post_id", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 1], ["post_id", 4], ["content", "asdadas"], ["created_at", "2018-06-18 07:30:52.469768"], ["updated_at", "2018-06-18 07:30:52.469768"]]
+  [1m[35m (157.8ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/posts/4
+Completed 302 Found in 203ms (ActiveRecord: 195.4ms)
+
+
+Started GET "/posts/4" for 127.0.0.1 at 2018-06-18 10:30:52 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered comments/_new.html.haml (4.5ms)
+  Rendered posts/show.html.haml within layouts/application (8.2ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 36ms (Views: 30.2ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/posts/4" for 127.0.0.1 at 2018-06-18 10:34:39 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered comments/_new.html.haml (4.6ms)
+  Rendered posts/show.html.haml within layouts/application (9.2ms)
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 0.7ms)
+
+
+  
+ActionView::Template::Error (Missing partial comments/_comment with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder, :haml]}. Searched in:
+  * "/home/roman/work/news_blog/app/views"
+  * "/home/roman/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/devise-4.4.3/app/views"
+):
+     7: 
+     8: =render "comments/new"
+     9: 
+    10: =render partial: 'comments/comment', locals: {comment: @post.comments}
+  
+app/views/posts/show.html.haml:10:in `_app_views_posts_show_html_haml___669803207461109122_69907474816520'
+  [1m[36mPost Load (110.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" ORDER BY "posts"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+Started GET "/groups/new" for 127.0.0.1 at 2018-06-18 13:49:08 +0300
+  [1m[35m (72.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/groups/new"):
+  
+actionpack (5.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.6.2) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.6.2) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.5) lib/rack/method_override.rb:22:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.6) lib/rails/engine.rb:522:in `call'
+puma (3.11.4) lib/puma/configuration.rb:225:in `call'
+puma (3.11.4) lib/puma/server.rb:632:in `handle_request'
+puma (3.11.4) lib/puma/server.rb:446:in `process_client'
+puma (3.11.4) lib/puma/server.rb:306:in `block in run'
+puma (3.11.4) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/g" for 127.0.0.1 at 2018-06-18 13:49:10 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/g"):
+  
+actionpack (5.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.6.2) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.6.2) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.5) lib/rack/method_override.rb:22:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.6) lib/rails/engine.rb:522:in `call'
+puma (3.11.4) lib/puma/configuration.rb:225:in `call'
+puma (3.11.4) lib/puma/server.rb:632:in `handle_request'
+puma (3.11.4) lib/puma/server.rb:446:in `process_client'
+puma (3.11.4) lib/puma/server.rb:306:in `block in run'
+puma (3.11.4) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2018-06-18 13:49:12 +0300
+Processing by PostsController#index as HTML
+Completed 401 Unauthorized in 36ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2018-06-18 13:49:13 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (115.2ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.1ms)
+Completed 200 OK in 762ms (Views: 733.0ms | ActiveRecord: 6.1ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2018-06-18 13:49:18 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4VJFIyl9/BvhvxzrjpKzhCgJOpNHzJCR65/7Z/P8NPtkHygVUTUnCvfFp3R86xU4M0n92kiDhkfa4I4KfHuZIw==", "user"=>{"email"=>"admin@admin.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (68.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "admin@admin.com"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (26.7ms)[0m  [1m[33mUPDATE "users" SET "current_sign_in_at" = $1, "last_sign_in_at" = $2, "sign_in_count" = $3, "updated_at" = $4 WHERE "users"."id" = $5[0m  [["current_sign_in_at", "2018-06-18 10:49:18.899007"], ["last_sign_in_at", "2018-06-18 05:57:09.153135"], ["sign_in_count", 3], ["updated_at", "2018-06-18 10:49:18.900207"], ["id", 1]]
+  [1m[35m (14.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/
+Completed 302 Found in 325ms (ActiveRecord: 109.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-18 13:49:18 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.8ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered collection of posts/_post.html.haml [5 times] (3.6ms)
+  Rendered posts/index.html.haml within layouts/application (44.9ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 102ms (Views: 66.4ms | ActiveRecord: 5.0ms)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 13:49:20 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered comments/_new.html.haml (5.1ms)
+  Rendered posts/show.html.haml within layouts/application (15.5ms)
+Completed 500 Internal Server Error in 111ms (ActiveRecord: 4.5ms)
+
+
+  
+ActionView::Template::Error (Missing partial comments/_comment with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder, :haml]}. Searched in:
+  * "/home/roman/work/news_blog/app/views"
+  * "/home/roman/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/devise-4.4.3/app/views"
+):
+     7: 
+     8: =render "comments/new"
+     9: 
+    10: =render partial: 'comments/comment',   locals: {comment: @post.comments}
+  
+app/views/posts/show.html.haml:10:in `_app_views_posts_show_html_haml__3317521829485273704_69954616325840'
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 13:55:53 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered comments/_new.html.haml (6.6ms)
+  Rendered posts/show.html.haml within layouts/application (11.7ms)
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 0.8ms)
+
+
+  
+ActionView::Template::Error (Missing partial comments/_comment with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder, :haml]}. Searched in:
+  * "/home/roman/work/news_blog/app/views"
+  * "/home/roman/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/devise-4.4.3/app/views"
+):
+     7: 
+     8: =render "comments/new"
+     9: 
+    10: =render partial: 'comments/comment',   locals: {comment: @post.comments}
+  
+app/views/posts/show.html.haml:10:in `_app_views_posts_show_html_haml__3317521829485273704_69954596836200'
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 13:56:17 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered comments/_new.html.haml (4.3ms)
+  Rendered posts/show.html.haml within layouts/application (8.3ms)
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 0.7ms)
+
+
+  
+ActionView::Template::Error (Missing partial comments/_comment with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder, :haml]}. Searched in:
+  * "/home/roman/work/news_blog/app/views"
+  * "/home/roman/.rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/devise-4.4.3/app/views"
+):
+     7: 
+     8: =render "comments/new"
+     9: 
+    10: =render partial: 'comments/comment'
+  
+app/views/posts/show.html.haml:10:in `_app_views_posts_show_html_haml__3317521829485273704_69954595201360'
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 13:56:52 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered comments/_new.html.haml (4.7ms)
+  [1m[36mComment Load (14.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  Rendered posts/show.html.haml within layouts/application (23.0ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 56ms (Views: 36.1ms | ActiveRecord: 15.3ms)
+
+
+Started POST "/posts/1/comments" for 127.0.0.1 at 2018-06-18 13:56:55 +0300
+Processing by CommentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"5S9IBw/BcUeQ9aE7sA489Du/RFiWwHxdepy/D3tY9wRmA5hx+eGO5c2FD4QR+mezagShLU9sAmupJnma2Wpwww==", "comment"=>{"content"=>"asd"}, "commit"=>"Create Comment", "post_id"=>"1"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (51.9ms)[0m  [1m[32mINSERT INTO "comments" ("user_id", "post_id", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 1], ["post_id", 1], ["content", "asd"], ["created_at", "2018-06-18 10:56:55.715124"], ["updated_at", "2018-06-18 10:56:55.715124"]]
+  [1m[35m (16.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/posts/1
+Completed 302 Found in 77ms (ActiveRecord: 69.7ms)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 13:56:55 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered comments/_new.html.haml (4.7ms)
+  [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered posts/show.html.haml within layouts/application (18.6ms)
+Completed 500 Internal Server Error in 25ms (ActiveRecord: 1.6ms)
+
+
+  
+ActionView::Template::Error (undefined method `name' for #<User:0x00007f3f254f9230>):
+     8: =render "comments/new"
+     9: 
+    10: -@comments.each do |comment|
+    11:   =comment.user.name
+    12:   =comment.content
+  
+app/views/posts/show.html.haml:11:in `block in _app_views_posts_show_html_haml__3317521829485273704_69954593882000'
+app/views/posts/show.html.haml:10:in `_app_views_posts_show_html_haml__3317521829485273704_69954593882000'
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 13:57:15 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered comments/_new.html.haml (4.3ms)
+  [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered posts/show.html.haml within layouts/application (10.2ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 39ms (Views: 32.9ms | ActiveRecord: 1.7ms)
+
+
+Started POST "/posts/1/comments" for 127.0.0.1 at 2018-06-18 13:57:19 +0300
+Processing by CommentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"t/XC6OsJsLlM/UgW97h+C5JodHENKbp8HE8PuKtsKok02RKeHSlPGxGN5qlWTCVMw9ORBNSFxErP9cktCV6tTg==", "comment"=>{"content"=>"asdsda"}, "commit"=>"Create Comment", "post_id"=>"1"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "comments" ("user_id", "post_id", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 1], ["post_id", 1], ["content", "asdsda"], ["created_at", "2018-06-18 10:57:19.503046"], ["updated_at", "2018-06-18 10:57:19.503046"]]
+  [1m[35m (20.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/posts/1
+Completed 302 Found in 28ms (ActiveRecord: 21.5ms)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 13:57:19 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered comments/_new.html.haml (4.9ms)
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered posts/show.html.haml within layouts/application (12.3ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 44ms (Views: 37.9ms | ActiveRecord: 1.7ms)
+
+
+Started POST "/posts/1/comments" for 127.0.0.1 at 2018-06-18 13:57:21 +0300
+Processing by CommentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"5SL0ObgBTVncFK6lnJN8XzmsjGdxpa34UE6QDGmnZkJmDiRPTiGy+4FkABo9ZycYaBdpEqgJ086D9FaZy5XhhQ==", "comment"=>{"content"=>"asdadasd"}, "commit"=>"Create Comment", "post_id"=>"1"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "comments" ("user_id", "post_id", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 1], ["post_id", 1], ["content", "asdadasd"], ["created_at", "2018-06-18 10:57:21.455191"], ["updated_at", "2018-06-18 10:57:21.455191"]]
+  [1m[35m (15.7ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/posts/1
+Completed 302 Found in 24ms (ActiveRecord: 17.4ms)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 13:57:21 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered comments/_new.html.haml (4.9ms)
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered posts/show.html.haml within layouts/application (12.2ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 48ms (Views: 41.7ms | ActiveRecord: 1.5ms)
+
+
+Started POST "/posts/1/comments" for 127.0.0.1 at 2018-06-18 13:57:23 +0300
+Processing by CommentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"W/52r82K67zLUPPHTUVoC5lLLmaXOjrLUeWPSYe/lPbY0qbZO6oUHpYgXXjssTNMyPDLE06WRP2CX0ncJY0TMQ==", "comment"=>{"content"=>"adasdasd"}, "commit"=>"Create Comment", "post_id"=>"1"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "comments" ("user_id", "post_id", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 1], ["post_id", 1], ["content", "adasdasd"], ["created_at", "2018-06-18 10:57:23.237765"], ["updated_at", "2018-06-18 10:57:23.237765"]]
+  [1m[35m (15.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/posts/1
+Completed 302 Found in 24ms (ActiveRecord: 17.5ms)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 13:57:23 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered comments/_new.html.haml (5.1ms)
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered posts/show.html.haml within layouts/application (13.0ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 43ms (Views: 36.9ms | ActiveRecord: 1.5ms)
+
+
+Started POST "/posts/1/comments" for 127.0.0.1 at 2018-06-18 13:57:24 +0300
+Processing by CommentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"CuZ0DO2Qw/3SbzvJwHF6ibJSKrsNzL+uvytioZOT5IOJyqR6G7A8X48flXZhhSHO4+nPztRgwZhskaQ0MaFjRA==", "comment"=>{"content"=>""}, "commit"=>"Create Comment", "post_id"=>"1"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+Redirected to http://0.0.0.0:3000/posts/1
+Completed 302 Found in 8ms (ActiveRecord: 1.5ms)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 13:57:24 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered comments/_new.html.haml (5.5ms)
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered posts/show.html.haml within layouts/application (12.7ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 41ms (Views: 36.1ms | ActiveRecord: 1.6ms)
+
+
+Started POST "/posts/1/comments" for 127.0.0.1 at 2018-06-18 13:57:25 +0300
+Processing by CommentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"SCfMnxfQg/StRvHKMmcWDYgfHqyhlR1bgcB8VrYevzXLCxzp4fB8VvA2X3WTk01K2aT72Xg5Y21SerrDFCw48g==", "comment"=>{"content"=>"saddasd"}, "commit"=>"Create Comment", "post_id"=>"1"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "comments" ("user_id", "post_id", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 1], ["post_id", 1], ["content", "saddasd"], ["created_at", "2018-06-18 10:57:25.740143"], ["updated_at", "2018-06-18 10:57:25.740143"]]
+  [1m[35m (23.1ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/posts/1
+Completed 302 Found in 31ms (ActiveRecord: 24.7ms)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 13:57:25 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered comments/_new.html.haml (5.3ms)
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered posts/show.html.haml within layouts/application (13.6ms)
+  Rendered shared/_header.html.erb (0.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 42ms (Views: 36.6ms | ActiveRecord: 1.8ms)
+
+
+Started POST "/posts/1/comments" for 127.0.0.1 at 2018-06-18 13:57:26 +0300
+Processing by CommentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LsRYq4Nw00mqzMIjDNgcTp9Jfe2IVTWiWV+ESRaImKWt6IjddVAs6/e8bJytLEcJzvKYmFH5S5SK5ULctLofYg==", "comment"=>{"content"=>"dasda"}, "commit"=>"Create Comment", "post_id"=>"1"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "comments" ("user_id", "post_id", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 1], ["post_id", 1], ["content", "dasda"], ["created_at", "2018-06-18 10:57:27.004427"], ["updated_at", "2018-06-18 10:57:27.004427"]]
+  [1m[35m (13.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/posts/1
+Completed 302 Found in 21ms (ActiveRecord: 14.9ms)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2018-06-18 13:57:27 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  Rendered comments/_new.html.haml (5.4ms)
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered posts/show.html.haml within layouts/application (14.8ms)
+  Rendered shared/_header.html.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+Completed 200 OK in 51ms (Views: 45.4ms | ActiveRecord: 1.8ms)
+
+
