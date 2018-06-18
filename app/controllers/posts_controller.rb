@@ -2,15 +2,12 @@ class PostsController < ApplicationController
   before_action :find_post, only: [:edit, :update, :show, :destroy]
   before_action :authenticate_user!
 
-
-
   def index
     @posts = Post.all
   end
 
   def new
     @post = Post.new
-
   end
 
   def create
@@ -23,9 +20,7 @@ class PostsController < ApplicationController
     end
   end
 
-    def edit
-
-    end
+    def edit; end
 
     def update
       if @post.update_attributes(post_params)
@@ -35,7 +30,10 @@ class PostsController < ApplicationController
       end
     end
 
-    def show; end
+    def show
+      @comments = @post.comments.all
+      @comment = current_user.comments.new
+    end
 
     def destroy
       if @post.destroy
@@ -54,5 +52,4 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:title, :content)
     end
-
 end

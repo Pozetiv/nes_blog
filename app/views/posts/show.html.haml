@@ -1,1 +1,12 @@
 show actions
+#post
+  %h3 post text
+
+
+%h1 Comments
+
+=render "comments/new"
+
+-@comments.each do |comment|
+  =comment.user.user_name
+  =comment.content
