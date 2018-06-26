@@ -1,0 +1,14 @@
+%nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  .container
+    =link_to 'Poster', root_path, class: 'navbar-brand'
+    .pull-rigth
+      %ul.nav
+        -if user_signed_in?
+          %li.nav-item= link_to "Logout #{current_user.user_name}", destroy_user_session_path, method: :delete, class: 'nav-link'
+        -else
+          %li.nav-item= link_to "Sign UP", new_user_registration_path, class: 'nav-link'
+          %li.nav-item= link_to "Sign IN", new_user_session_path, class: 'nav-link'
+      
+    
+ 
+

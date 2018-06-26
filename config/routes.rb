@@ -6,5 +6,9 @@ Rails.application.routes.draw do
      resources :comments
    end
 
-  root 'posts#index'
+
+  root 'welcomes#welcome'
+
+  get 'welcome', to: "welcomes#welcome"
+  get 'feed', to: "welcomes#feed"
 end

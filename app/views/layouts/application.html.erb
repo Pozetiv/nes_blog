@@ -8,16 +8,15 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-  <div class="container-fluid">
     <header>
       <%= render('shared/header') %>
     </header>
-
-    <%= yield %>
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
 
     <footer>
       <%= render 'shared/footer' %>
     </footer>
-  </div>
   </body>
 </html>
