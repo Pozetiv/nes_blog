@@ -51,4 +51,6 @@ gem 'bootstrap', '~> 4.1', '>= 4.1.1'
 gem 'jquery-rails'
 gem 'simple_form', '~> 4.0', '>= 4.0.1'
 gem 'devise'
-
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'friendly_id', '~> 5.2', '>= 5.2.4'

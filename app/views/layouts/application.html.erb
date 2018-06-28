@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title></title>
+    <title> <%= yield(:title) %></title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -11,10 +11,10 @@
     <header>
       <%= render('shared/header') %>
     </header>
-   
+    <div class="container-fluid">
       <%= yield %>
-
-    <footer>
+    </div>
+    <footer class="fixed-bottom">
       <%= render 'shared/footer' %>
     </footer>
   </body>

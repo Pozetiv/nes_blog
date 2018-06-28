@@ -1,8 +1,9 @@
 class CommentsController < ApplicationController
   before_action :find_post
-  before_action :find_comment, only: [:update, :destroy]
+  before_action :find_comment, only: [:update, :edit, :destroy]
   before_action :authenticate_user!
-  before_action :comment_owner, only: [:destroy, :edit, :update]
+  before_action :comment_owner, only: [:edit, :update, :destroy]
+
 
 
   def create
@@ -16,8 +17,10 @@ class CommentsController < ApplicationController
     end
   end
 
+  def edit; end
+
   def update
-    if @comment.update_attributes(comments_params)
+    if @comment.update(comments_params)
       redirect_to post_path(@post)
     else
       flash.now[:danger] = 'Opps I cant update this comment'
@@ -30,7 +33,7 @@ class CommentsController < ApplicationController
    if @comment.destroy
      redirect_to post_path(@post)
    else
-     flash.now[:danger] = 'Opps i cant delete this comments'
+     flash.now[:danger] = 'Opps I cant delete this comments'
      redirect_to post_path(@post)
    end
   end
@@ -38,7 +41,7 @@ class CommentsController < ApplicationController
   private
 
   def find_post
-    @post = Post.find(params[:post_id])
+    @post = Post.friendly.find(params[:post_id])
   end
 
   def comments_params
@@ -46,13 +49,15 @@ class CommentsController < ApplicationController
   end
 
   def find_comment
-    @comment = @post.comment.find(params[:id])
+    @comment = @post.comments.find(params[:id])
   end
 
   def comment_owner
     unless current_user.id == @comment.user_id
-      flash.now[:danger] = "Sorry your are not owner"
       redirect_to post_path(@post)
+      flash[:info] = "Sorry, your are not owner this is comment"
     end
   end
+
+
 end

@@ -1,2 +1,9 @@
 .col-md-4
-  =link_to post.title, post_path(post)
+  .cust_card
+    .cust_card_title
+      %h3= link_to post.title, post_path(post)
+      %h5= 'Published by '+ "#{post.user.user_name}" +' at the ' + "#{post.created_at.to_date.strftime("%d %B, %Y") }"
+      =link_to(image_tag(post.image.url(:small), class: 'card-img-top' ), post_path(post)) if post.image?
+    .cust_card_body
+      %p=post.short_body
+      =link_to "Read", post_path(post), class: 'btn btn-success'
