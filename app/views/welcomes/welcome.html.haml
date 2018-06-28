@@ -1,6 +1,7 @@
-.container-fluid
-  .position-relative.overflow-hidden.p-3.p-md-5.m-md-3.text-center.bg-light#image
-    .col-md-5.p-lg-5.mx-auto.my-5
-      %h2.display-4.font-weight-normal THE POSTER
+.position-relative.overflow-hidden.p-3.p-md-5.m-md-3.text-center.bg-light#image
+  .container-fluid
+    .col-md-5.p-lg-5.mx-auto.my-5#texxt 
+      %h2.display-4.font-weight-normalTHE POSTER
       %p.lead.font-weight-normal Your are can find all
-      =link_to 'Enter', root_path, class: 'btn btn-outline-secondary'
+      =link_to 'Enter', new_user_session_path, class: 'btn btn-info btn-lg'
+

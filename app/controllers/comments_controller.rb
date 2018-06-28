@@ -1,8 +1,8 @@
 class CommentsController < ApplicationController
-  before_action :find_post, only: [:create, :update, :destroy]
+  before_action :find_post
   before_action :find_comment, only: [:update, :destroy]
   before_action :authenticate_user!
-  before_action :comment_owner
+  before_action :comment_owner, only: [:destroy, :edit, :update]
 
 
   def create
@@ -50,7 +50,7 @@ class CommentsController < ApplicationController
   end
 
   def comment_owner
-    unless @comment.user_id == current_user.id
+    unless current_user.id == @comment.user_id
       flash.now[:danger] = "Sorry your are not owner"
       redirect_to post_path(@post)
     end
