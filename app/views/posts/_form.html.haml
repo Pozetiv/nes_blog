@@ -4,5 +4,7 @@
       =f.input :title
       =f.input :content
       =f.input :short_body, label: 'Write short information what about this post'
+      Select category for the post
+      =f.select :category_id, Category.all.map {|cat| [cat.category_name, cat.id] }, include_blank: true, class: 'form-control'
       =f.input :image, as: :file, label: 'Add image'
       =f.button :submit, class: 'btn btn-primary'

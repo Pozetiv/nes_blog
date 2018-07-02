@@ -14735,3 +14735,953 @@ Processing by WelcomesController#welcome as HTML
 Completed 200 OK in 58ms (Views: 56.8ms | ActiveRecord: 0.5ms)
 
 
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2561293738743026490)[0m
+  [1m[35m (26.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateCategories (20180702140220)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (481.3ms)[0m  [1m[35mCREATE TABLE "categories" ("id" bigserial primary key, "category_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (47.5ms)[0m  [1m[35mCREATE  INDEX  "index_categories_on_category_name" ON "categories"  ("category_name")[0m
+  [1m[35m (76.0ms)[0m  [1m[35mALTER TABLE "posts" ADD "category_id" integer[0m
+  [1m[35m (106.6ms)[0m  [1m[35mALTER TABLE "posts" ADD CONSTRAINT "fk_rails_9b1b26f040"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20180702140220"]]
+  [1m[35m (23.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (31.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(2561293738743026490)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "Cars"], ["created_at", "2018-07-02 14:11:11.040304"], ["updated_at", "2018-07-02 14:11:11.040304"]]
+  [1m[35m (82.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "Technologies"], ["created_at", "2018-07-02 14:11:11.124751"], ["updated_at", "2018-07-02 14:11:11.124751"]]
+  [1m[35m (9.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "Othher"], ["created_at", "2018-07-02 14:11:11.135904"], ["updated_at", "2018-07-02 14:11:11.135904"]]
+  [1m[35m (9.4ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for 127.0.0.1 at 2018-07-02 17:18:15 +0300
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by WelcomesController#welcome as HTML
+  Rendering welcomes/welcome.html.haml within layouts/application
+  Rendered welcomes/welcome.html.haml within layouts/application (44.1ms)
+  [1m[36mUser Load (60.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[33mUPDATE "users" SET "current_sign_in_at" = $1, "last_sign_in_at" = $2, "sign_in_count" = $3, "updated_at" = $4 WHERE "users"."id" = $5[0m  [["current_sign_in_at", "2018-07-02 14:18:17.067551"], ["last_sign_in_at", "2018-06-30 15:59:21.113156"], ["sign_in_count", 4], ["updated_at", "2018-07-02 14:18:17.068524"], ["id", 1]]
+  [1m[35m (19.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendered shared/_header.html.haml (110.0ms)
+  Rendered shared/_footer.html.haml (1.6ms)
+Completed 200 OK in 1032ms (Views: 926.6ms | ActiveRecord: 84.2ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2018-07-02 17:18:23 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.7ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered collection of posts/_post.html.haml [1 times] (40.8ms)
+  Rendered posts/index.html.haml within layouts/application (74.0ms)
+  Rendered shared/_header.html.haml (3.2ms)
+  Rendered shared/_footer.html.haml (1.5ms)
+Completed 200 OK in 269ms (Views: 133.2ms | ActiveRecord: 4.7ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2018-07-02 17:18:26 +0300
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/new.html.haml within layouts/application
+  Rendered posts/_form.html.haml (2.1ms)
+  Rendered posts/new.html.haml within layouts/application (4.6ms)
+Completed 500 Internal Server Error in 26ms (ActiveRecord: 0.4ms)
+
+
+  
+SyntaxError (/home/roman/work/news_blog/app/views/posts/_form.html.haml:7: syntax error, unexpected tSTRING_DEND, expecting ')'
+...at.id] }, include_blank: true }
+...                              ^
+/home/roman/work/news_blog/app/views/posts/_form.html.haml:10: syntax error, unexpected keyword_end, expecting ')'
+...t.buffer << ("\n".freeze);; end;; _hamlout.buffer << ((::Ham...
+...                            ^~~
+/home/roman/work/news_blog/app/views/posts/_form.html.haml:10: syntax error, unexpected keyword_ensure, expecting ')'
+...:Util.html_safe(_erbout);ensure;@haml_buffer = @haml_buffer....
+...                         ^~~~~~
+/home/roman/work/news_blog/app/views/posts/_form.html.haml:10: syntax error, unexpected keyword_end, expecting ')'
+...uffer.upper if @haml_buffer;end;
+...                            ^~~
+/home/roman/work/news_blog/app/views/posts/_form.html.haml:13: syntax error, unexpected keyword_end, expecting ')'
+          end
+          ^~~):
+  
+app/views/posts/_form.html.haml:7: syntax error, unexpected tSTRING_DEND, expecting ')'
+app/views/posts/_form.html.haml:10: syntax error, unexpected keyword_end, expecting ')'
+app/views/posts/_form.html.haml:10: syntax error, unexpected keyword_ensure, expecting ')'
+app/views/posts/_form.html.haml:10: syntax error, unexpected keyword_end, expecting ')'
+app/views/posts/_form.html.haml:13: syntax error, unexpected keyword_end, expecting ')'
+app/views/posts/new.html.haml:4:in `_app_views_posts_new_html_haml__1793571567827933611_70280448819540'
+Started GET "/posts/new" for 127.0.0.1 at 2018-07-02 17:18:43 +0300
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/new.html.haml within layouts/application
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered posts/_form.html.haml (237.4ms)
+  Rendered posts/new.html.haml within layouts/application (245.0ms)
+  Rendered shared/_header.html.haml (3.1ms)
+  Rendered shared/_footer.html.haml (1.3ms)
+Completed 200 OK in 294ms (Views: 287.4ms | ActiveRecord: 3.7ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2018-07-02 17:19:04 +0300
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"5iIPvwy1JU2+91HEyacZjcMn4ddc7kMT5yFLI5O8frNjdcUiEHxCLVkX3kLohCY5S3qXcdKaaBYxUti6SPlRoA==", "post"=>{"title"=>"adadasd", "content"=>"addadas", "short_body"=>"dadasdadadada", "category_id"=>"1"}, "commit"=>"Create Post"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Unpermitted parameter: :category_id
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPost Exists (0.7ms)[0m  [1m[34mSELECT  1 AS one FROM "posts" WHERE ("posts"."id" IS NOT NULL) AND "posts"."slug" = $1 LIMIT $2[0m  [["slug", "adadasd"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  Rendering posts/new.html.haml within layouts/application
+  Rendered posts/_form.html.haml (2.0ms)
+  Rendered posts/new.html.haml within layouts/application (4.3ms)
+Completed 500 Internal Server Error in 195ms (ActiveRecord: 1.6ms)
+
+
+  
+SyntaxError (/home/roman/work/news_blog/app/views/posts/_form.html.haml:7: syntax error, unexpected '='
+...t.id] }, include_blank: true, =f.input :image, as: :file, la...
+...                              ^):
+  
+app/views/posts/_form.html.haml:7: syntax error, unexpected '='
+app/views/posts/new.html.haml:4:in `_app_views_posts_new_html_haml__1793571567827933611_70280441973000'
+app/controllers/posts_controller.rb:20:in `create'
+Started GET "/posts/new" for 127.0.0.1 at 2018-07-02 17:19:31 +0300
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/new.html.haml within layouts/application
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered posts/_form.html.haml (10.1ms)
+  Rendered posts/new.html.haml within layouts/application (12.4ms)
+  Rendered shared/_header.html.haml (3.0ms)
+  Rendered shared/_footer.html.haml (1.3ms)
+Completed 200 OK in 60ms (Views: 56.4ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2018-07-02 17:19:39 +0300
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"16J7oghmSadurYlHF5hJvEqFE5aZwlwq4TZyf+k6a5xS9bE/FK8ux4lNBsE2u3YIwthlMBe2dy83ReHmMn9Ejw==", "post"=>{"title"=>"adasd", "content"=>"asdasd", "short_body"=>"asdasd", "category_id"=>"3"}, "commit"=>"Create Post"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Unpermitted parameter: :category_id
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPost Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "posts" WHERE ("posts"."id" IS NOT NULL) AND "posts"."slug" = $1 LIMIT $2[0m  [["slug", "adasd"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  Rendering posts/new.html.haml within layouts/application
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered posts/_form.html.haml (9.0ms)
+  Rendered posts/new.html.haml within layouts/application (11.3ms)
+  Rendered shared/_header.html.haml (3.1ms)
+  Rendered shared/_footer.html.haml (1.6ms)
+Completed 200 OK in 70ms (Views: 63.2ms | ActiveRecord: 1.5ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2018-07-02 17:19:46 +0300
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Jb2IPz0fwdyGXdfR/JzqOhi4SfXiKjCUV0pKTM7xEUqg6kKiIdamvGG9WFfdv9WOkOU/U2xeG5GBOdnVFbQ+WQ==", "post"=>{"title"=>"adasd", "content"=>"asdasd", "short_body"=>"asdasdasdasd", "category_id"=>"3"}, "commit"=>"Create Post"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Unpermitted parameter: :category_id
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPost Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "posts" WHERE ("posts"."id" IS NOT NULL) AND "posts"."slug" = $1 LIMIT $2[0m  [["slug", "adasd"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  Rendering posts/new.html.haml within layouts/application
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered posts/_form.html.haml (9.1ms)
+  Rendered posts/new.html.haml within layouts/application (11.2ms)
+  Rendered shared/_header.html.haml (3.5ms)
+  Rendered shared/_footer.html.haml (1.9ms)
+Completed 200 OK in 68ms (Views: 61.1ms | ActiveRecord: 1.4ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2018-07-02 17:20:34 +0300
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z3ffS/wf6z4tB5H/ClvLhEvJin7ky28m2qGor+Wqjr5KIBXW4NaMXsrnHnkrePQww5T82Gq/RCMM0js2Pu+hrQ==", "post"=>{"title"=>"adasdadasdasd", "content"=>"asdasddasdasd", "short_body"=>"asdasdasdasdasdad", "category_id"=>"2"}, "commit"=>"Create Post"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPost Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "posts" WHERE ("posts"."id" IS NOT NULL) AND "posts"."slug" = $1 LIMIT $2[0m  [["slug", "adasdadasdasd"], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (18.8ms)[0m  [1m[32mINSERT INTO "posts" ("user_id", "title", "content", "created_at", "updated_at", "slug", "short_body", "category_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 1], ["title", "adasdadasdasd"], ["content", "asdasddasdasd"], ["created_at", "2018-07-02 14:20:34.437527"], ["updated_at", "2018-07-02 14:20:34.437527"], ["slug", "adasdadasdasd"], ["short_body", "asdasdasdasdasdad"], ["category_id", 2]]
+  [1m[35m (33.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/posts/adasdadasdasd
+Completed 302 Found in 286ms (ActiveRecord: 64.7ms)
+
+
+Started GET "/posts/adasdadasdasd" for 127.0.0.1 at 2018-07-02 17:20:34 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"adasdadasdasd"}
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."slug" = $1 LIMIT $2[0m  [["slug", "adasdadasdasd"], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered comments/_new.html.haml (55.7ms)
+  [1m[36mComment Load (46.6ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 4]]
+  Rendered posts/show.html.haml within layouts/application (136.7ms)
+  Rendered shared/_header.html.haml (20.2ms)
+  Rendered shared/_footer.html.haml (1.5ms)
+Completed 200 OK in 379ms (Views: 293.6ms | ActiveRecord: 50.6ms)
+
+
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" ORDER BY "categories"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" ORDER BY "categories"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" ORDER BY "categories"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" ORDER BY "categories"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" ORDER BY "posts"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" ORDER BY "posts"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" ORDER BY "posts"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" ORDER BY "posts"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" ORDER BY "posts"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" ORDER BY "categories"."id" ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 1]]
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" ORDER BY "categories"."id" ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 1]]
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."category_id" = $1[0m  [["category_id", 2]]
+Started GET "/posts" for 127.0.0.1 at 2018-07-02 17:23:47 +0300
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.haml within layouts/application
+  [1m[36mPost Load (0.7ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered collection of posts/_post.html.haml [2 times] (23.5ms)
+  Rendered posts/index.html.haml within layouts/application (52.8ms)
+  Rendered shared/_header.html.haml (3.1ms)
+  Rendered shared/_footer.html.haml (1.2ms)
+Completed 200 OK in 313ms (Views: 253.7ms | ActiveRecord: 8.8ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2018-07-02 17:23:57 +0300
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/new.html.haml within layouts/application
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered posts/_form.html.haml (76.9ms)
+  Rendered posts/new.html.haml within layouts/application (81.3ms)
+  Rendered shared/_header.html.haml (3.0ms)
+  Rendered shared/_footer.html.haml (1.4ms)
+Completed 200 OK in 135ms (Views: 128.3ms | ActiveRecord: 3.9ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2018-07-02 17:25:51 +0300
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/new.html.haml within layouts/application
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered posts/_form.html.haml (22.7ms)
+  Rendered posts/new.html.haml within layouts/application (27.1ms)
+  Rendered shared/_header.html.haml (4.8ms)
+  Rendered shared/_footer.html.haml (2.1ms)
+Completed 200 OK in 104ms (Views: 100.7ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2018-07-02 17:25:55 +0300
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/new.html.haml within layouts/application
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered posts/_form.html.haml (13.6ms)
+  Rendered posts/new.html.haml within layouts/application (16.7ms)
+  Rendered shared/_header.html.haml (2.8ms)
+  Rendered shared/_footer.html.haml (1.2ms)
+Completed 200 OK in 79ms (Views: 76.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2018-07-02 17:25:56 +0300
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/new.html.haml within layouts/application
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered posts/_form.html.haml (9.9ms)
+  Rendered posts/new.html.haml within layouts/application (12.7ms)
+  Rendered shared/_header.html.haml (3.0ms)
+  Rendered shared/_footer.html.haml (1.3ms)
+Completed 200 OK in 61ms (Views: 57.7ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2018-07-02 17:26:44 +0300
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/new.html.haml within layouts/application
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered posts/_form.html.haml (8.8ms)
+  Rendered posts/new.html.haml within layouts/application (11.2ms)
+  Rendered shared/_header.html.haml (3.2ms)
+  Rendered shared/_footer.html.haml (1.3ms)
+Completed 200 OK in 59ms (Views: 55.9ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-07-02 17:27:03 +0300
+Processing by WelcomesController#welcome as HTML
+  Rendering welcomes/welcome.html.haml within layouts/application
+  Rendered welcomes/welcome.html.haml within layouts/application (3.6ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered shared/_header.html.haml (4.5ms)
+  Rendered shared/_footer.html.haml (1.3ms)
+Completed 200 OK in 57ms (Views: 55.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-07-02 17:28:24 +0300
+Processing by WelcomesController#welcome as HTML
+  Rendering welcomes/welcome.html.haml within layouts/application
+  Rendered welcomes/welcome.html.haml within layouts/application (4.0ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered shared/_header.html.haml (4.5ms)
+  Rendered shared/_footer.html.haml (1.5ms)
+Completed 200 OK in 5477ms (Views: 5475.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-07-02 17:28:54 +0300
+Processing by WelcomesController#welcome as HTML
+  Rendering welcomes/welcome.html.haml within layouts/application
+  Rendered welcomes/welcome.html.haml within layouts/application (2.3ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered shared/_header.html.haml (4.4ms)
+  Rendered shared/_footer.html.haml (1.2ms)
+Completed 200 OK in 2662ms (Views: 2660.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-07-02 17:29:06 +0300
+Processing by WelcomesController#welcome as HTML
+  Rendering welcomes/welcome.html.haml within layouts/application
+  Rendered welcomes/welcome.html.haml within layouts/application (2.4ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered shared/_header.html.haml (4.5ms)
+  Rendered shared/_footer.html.haml (1.3ms)
+Completed 200 OK in 2696ms (Views: 2694.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-07-02 17:34:41 +0300
+Processing by WelcomesController#welcome as HTML
+  Rendering welcomes/welcome.html.haml within layouts/application
+  Rendered welcomes/welcome.html.haml within layouts/application (2.6ms)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered shared/_header.html.haml (5.0ms)
+  Rendered shared/_footer.html.haml (1.5ms)
+Completed 200 OK in 2695ms (Views: 2693.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-07-02 17:35:09 +0300
+Processing by WelcomesController#welcome as HTML
+  Rendering welcomes/welcome.html.haml within layouts/application
+  Rendered welcomes/welcome.html.haml within layouts/application (3.0ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered shared/_header.html.haml (4.5ms)
+  Rendered shared/_footer.html.haml (1.5ms)
+Completed 200 OK in 2723ms (Views: 2721.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-07-02 17:36:07 +0300
+Processing by WelcomesController#welcome as HTML
+  Rendering welcomes/welcome.html.haml within layouts/application
+  Rendered welcomes/welcome.html.haml within layouts/application (3.1ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered shared/_header.html.haml (4.5ms)
+  Rendered shared/_footer.html.haml (1.2ms)
+Completed 200 OK in 2753ms (Views: 2751.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-07-02 17:36:40 +0300
+Processing by WelcomesController#welcome as HTML
+  Rendering welcomes/welcome.html.haml within layouts/application
+  Rendered welcomes/welcome.html.haml within layouts/application (2.4ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered shared/_header.html.haml (4.5ms)
+  Rendered shared/_footer.html.haml (1.4ms)
+Completed 200 OK in 2874ms (Views: 2872.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-07-02 17:37:06 +0300
+Processing by WelcomesController#welcome as HTML
+  Rendering welcomes/welcome.html.haml within layouts/application
+  Rendered welcomes/welcome.html.haml within layouts/application (3.0ms)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered shared/_header.html.haml (4.7ms)
+  Rendered shared/_footer.html.haml (1.3ms)
+Completed 200 OK in 2832ms (Views: 2830.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-07-02 17:37:28 +0300
+Processing by WelcomesController#welcome as HTML
+  Rendering welcomes/welcome.html.haml within layouts/application
+  Rendered welcomes/welcome.html.haml within layouts/application (3.2ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered shared/_header.html.haml (4.5ms)
+  Rendered shared/_footer.html.haml (1.4ms)
+Completed 200 OK in 51ms (Views: 49.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-07-02 17:37:30 +0300
+Processing by WelcomesController#welcome as HTML
+  Rendering welcomes/welcome.html.haml within layouts/application
+  Rendered welcomes/welcome.html.haml within layouts/application (2.7ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered shared/_header.html.haml (4.8ms)
+  Rendered shared/_footer.html.haml (1.4ms)
+Completed 200 OK in 51ms (Views: 49.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-07-02 17:38:43 +0300
+Processing by WelcomesController#welcome as HTML
+  Rendering welcomes/welcome.html.haml within layouts/application
+  Rendered welcomes/welcome.html.haml within layouts/application (3.3ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered shared/_header.html.haml (5.1ms)
+  Rendered shared/_footer.html.haml (1.5ms)
+Completed 200 OK in 2728ms (Views: 2726.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-07-02 17:38:58 +0300
+Processing by WelcomesController#welcome as HTML
+  Rendering welcomes/welcome.html.haml within layouts/application
+  Rendered welcomes/welcome.html.haml within layouts/application (3.6ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered shared/_header.html.haml (4.6ms)
+  Rendered shared/_footer.html.haml (1.2ms)
+Completed 200 OK in 2809ms (Views: 2807.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-07-02 17:39:18 +0300
+Processing by WelcomesController#welcome as HTML
+  Rendering welcomes/welcome.html.haml within layouts/application
+  Rendered welcomes/welcome.html.haml within layouts/application (2.5ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered shared/_header.html.haml (4.7ms)
+  Rendered shared/_footer.html.haml (1.5ms)
+Completed 200 OK in 2670ms (Views: 2668.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-07-02 17:39:54 +0300
+Processing by WelcomesController#welcome as HTML
+  Rendering welcomes/welcome.html.haml within layouts/application
+  Rendered welcomes/welcome.html.haml within layouts/application (3.0ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered shared/_header.html.haml (4.6ms)
+  Rendered shared/_footer.html.haml (1.4ms)
+Completed 200 OK in 2661ms (Views: 2659.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2018-07-02 17:42:38 +0300
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/new.html.haml within layouts/application
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered posts/_form.html.haml (75.7ms)
+  Rendered posts/new.html.haml within layouts/application (83.8ms)
+  Rendered shared/_header.html.haml (8.7ms)
+  Rendered shared/_footer.html.haml (3.2ms)
+Completed 200 OK in 3715ms (Views: 3642.2ms | ActiveRecord: 10.3ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2018-07-02 17:42:53 +0300
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/new.html.haml within layouts/application
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered posts/_form.html.haml (9.7ms)
+  Rendered posts/new.html.haml within layouts/application (16.4ms)
+  Rendered shared/_header.html.haml (3.2ms)
+  Rendered shared/_footer.html.haml (1.6ms)
+Completed 200 OK in 72ms (Views: 67.7ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2018-07-02 17:43:26 +0300
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/new.html.haml within layouts/application
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered posts/_form.html.haml (9.7ms)
+  Rendered posts/new.html.haml within layouts/application (12.3ms)
+  Rendered shared/_header.html.haml (3.3ms)
+  Rendered shared/_footer.html.haml (1.6ms)
+Completed 200 OK in 67ms (Views: 63.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2018-07-02 17:43:28 +0300
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/new.html.haml within layouts/application
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered posts/_form.html.haml (10.8ms)
+  Rendered posts/new.html.haml within layouts/application (13.2ms)
+  Rendered shared/_header.html.haml (3.7ms)
+  Rendered shared/_footer.html.haml (1.8ms)
+Completed 200 OK in 66ms (Views: 63.0ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2018-07-02 17:43:36 +0300
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/new.html.haml within layouts/application
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered posts/_form.html.haml (11.7ms)
+  Rendered posts/new.html.haml within layouts/application (14.5ms)
+  Rendered shared/_header.html.haml (4.2ms)
+  Rendered shared/_footer.html.haml (1.6ms)
+Completed 200 OK in 80ms (Views: 76.7ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2018-07-02 17:43:41 +0300
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"q/hPT0rI/e3BkOeFc0k5FRrJuljAmc1I9VBvPa3LAGAur4XSVgGajSZwaANSagahkpTM/k7t5k0jI/ykdo4vcw==", "post"=>{"title"=>"", "content"=>"", "short_body"=>"", "category_id"=>""}, "commit"=>"Create Post"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  Rendering posts/new.html.haml within layouts/application
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered posts/_form.html.haml (11.4ms)
+  Rendered posts/new.html.haml within layouts/application (14.2ms)
+  Rendered shared/_header.html.haml (3.6ms)
+  Rendered shared/_footer.html.haml (1.7ms)
+Completed 200 OK in 92ms (Views: 69.6ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-07-02 22:01:23 +0300
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by WelcomesController#welcome as HTML
+  Rendering welcomes/welcome.html.haml within layouts/application
+  Rendered welcomes/welcome.html.haml within layouts/application (6.2ms)
+  Rendered shared/_header.html.haml (6.7ms)
+  Rendered shared/_footer.html.haml (1.2ms)
+Completed 200 OK in 6346ms (Views: 6328.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2018-07-03 17:21:35 +0300
+  [1m[35m (31.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#new as HTML
+Completed 401 Unauthorized in 20ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2018-07-03 17:21:36 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (2.7ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (104.2ms)
+  Rendered shared/_header.html.haml (50.7ms)
+  Rendered shared/_footer.html.haml (1.5ms)
+Completed 200 OK in 851ms (Views: 693.8ms | ActiveRecord: 133.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-07-03 17:21:42 +0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.1ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (20.8ms)
+  Rendered shared/_header.html.haml (3.3ms)
+  Rendered shared/_footer.html.haml (1.4ms)
+Completed 200 OK in 77ms (Views: 75.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2018-07-03 17:22:02 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ODvPw8uUztA78dPbJlf/4uMIyMljdBR326BC53P0Ym9iTfmtbd8NEkOXcqFX2WQRWCBt2d3JAvpvCXMrmJ7Lkg==", "user"=>{"email"=>"admin@admin.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (59.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "admin@admin.com"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 79ms (ActiveRecord: 59.9ms)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ODvPw8uUztA78dPbJlf/4uMIyMljdBR326BC53P0Ym9iTfmtbd8NEkOXcqFX2WQRWCBt2d3JAvpvCXMrmJ7Lkg==", "user"=>{"email"=>"admin@admin.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.9ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (9.2ms)
+  Rendered shared/_header.html.haml (3.4ms)
+  Rendered shared/_footer.html.haml (1.5ms)
+Completed 200 OK in 277ms (Views: 71.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-07-03 17:22:06 +0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (5.3ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (14.3ms)
+  Rendered shared/_header.html.haml (3.9ms)
+  Rendered shared/_footer.html.haml (1.5ms)
+Completed 200 OK in 71ms (Views: 69.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-07-03 17:22:19 +0300
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"18ryBlHtMvOGBhwmfQ2G3/AZGuxII7L7Rp7dXomliwZ+ASsT8z7+yeRvr9u0R4csRnZCy65jdhBK2DtrqWCpwQ==", "user"=>{"email"=>"admin@admin.com", "user_name"=>"admin", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "admin@admin.com"], ["LIMIT", 1]]
+  [1m[35mSQL (66.0ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "user_name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["email", "admin@admin.com"], ["encrypted_password", "$2a$11$fi0e3WqDf5kErhIbDIpeSOR9BP6eYcftqAnj1O5h9.nAL0rbwKwyu"], ["user_name", "admin"], ["created_at", "2018-07-03 14:22:19.170645"], ["updated_at", "2018-07-03 14:22:19.170645"]]
+  [1m[35m (12.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (17.0ms)[0m  [1m[33mUPDATE "users" SET "sign_in_count" = $1, "current_sign_in_at" = $2, "last_sign_in_at" = $3, "current_sign_in_ip" = $4, "last_sign_in_ip" = $5, "updated_at" = $6 WHERE "users"."id" = $7[0m  [["sign_in_count", 1], ["current_sign_in_at", "2018-07-03 14:22:19.251888"], ["last_sign_in_at", "2018-07-03 14:22:19.251888"], ["current_sign_in_ip", "127.0.0.1/32"], ["last_sign_in_ip", "127.0.0.1/32"], ["updated_at", "2018-07-03 14:22:19.252907"], ["id", 1]]
+  [1m[35m (11.3ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/posts/new
+Completed 302 Found in 301ms (ActiveRecord: 107.8ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2018-07-03 17:22:19 +0300
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/new.html.haml within layouts/application
+  [1m[36mCategory Load (20.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered posts/_form.html.haml (67.9ms)
+  Rendered posts/new.html.haml within layouts/application (72.1ms)
+  Rendered shared/_header.html.haml (4.6ms)
+  Rendered shared/_footer.html.haml (1.7ms)
+Completed 200 OK in 229ms (Views: 112.3ms | ActiveRecord: 28.7ms)
+
+
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (14.5ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "Cars"], ["created_at", "2018-07-03 14:22:46.306996"], ["updated_at", "2018-07-03 14:22:46.306996"]]
+  [1m[35m (13.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "Technologies"], ["created_at", "2018-07-03 14:22:46.337257"], ["updated_at", "2018-07-03 14:22:46.337257"]]
+  [1m[35m (8.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "Othher"], ["created_at", "2018-07-03 14:22:46.348115"], ["updated_at", "2018-07-03 14:22:46.348115"]]
+  [1m[35m (8.6ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/posts/new" for 127.0.0.1 at 2018-07-03 17:22:54 +0300
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/new.html.haml within layouts/application
+  [1m[36mCategory Load (1.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered posts/_form.html.haml (91.0ms)
+  Rendered posts/new.html.haml within layouts/application (97.1ms)
+  Rendered shared/_header.html.haml (3.3ms)
+  Rendered shared/_footer.html.haml (1.7ms)
+Completed 200 OK in 383ms (Views: 299.6ms | ActiveRecord: 20.9ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2018-07-03 17:23:02 +0300
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"lf4ZzcdxG7ZLkhHcqH9IGUmdmeKya3h8srndSq7HnT/PiC+jYTrYdDP0sKbZ8dPq8rU88gzWbvEGEOyGRa00wg==", "post"=>{"title"=>"asdad", "content"=>"asdasd", "short_body"=>"asdada", "category_id"=>"1"}, "commit"=>"Create Post"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPost Exists (22.8ms)[0m  [1m[34mSELECT  1 AS one FROM "posts" WHERE ("posts"."id" IS NOT NULL) AND "posts"."slug" = $1 LIMIT $2[0m  [["slug", "asdad"], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (27.7ms)[0m  [1m[32mINSERT INTO "posts" ("user_id", "title", "content", "created_at", "updated_at", "slug", "short_body", "category_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 1], ["title", "asdad"], ["content", "asdasd"], ["created_at", "2018-07-03 14:23:02.803311"], ["updated_at", "2018-07-03 14:23:02.803311"], ["slug", "asdad"], ["short_body", "asdada"], ["category_id", 1]]
+  [1m[35m (11.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/posts/asdad
+Completed 302 Found in 275ms (ActiveRecord: 63.3ms)
+
+
+Started GET "/posts/asdad" for 127.0.0.1 at 2018-07-03 17:23:02 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"asdad"}
+  [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."slug" = $1 LIMIT $2[0m  [["slug", "asdad"], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered comments/_new.html.haml (7.1ms)
+  [1m[36mComment Load (1.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  Rendered posts/show.html.haml within layouts/application (25.6ms)
+  Rendered shared/_header.html.haml (5.6ms)
+  Rendered shared/_footer.html.haml (2.6ms)
+Completed 200 OK in 161ms (Views: 104.7ms | ActiveRecord: 10.6ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2018-07-03 17:23:10 +0300
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"lf4ZzcdxG7ZLkhHcqH9IGUmdmeKya3h8srndSq7HnT/PiC+jYTrYdDP0sKbZ8dPq8rU88gzWbvEGEOyGRa00wg==", "post"=>{"title"=>"asdadadasdasd", "content"=>"asdasdasdasdas", "short_body"=>"asdadaasdad", "category_id"=>"1"}, "commit"=>"Create Post"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (1.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPost Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "posts" WHERE ("posts"."id" IS NOT NULL) AND "posts"."slug" = $1 LIMIT $2[0m  [["slug", "asdadadasdasd"], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "posts" ("user_id", "title", "content", "created_at", "updated_at", "slug", "short_body", "category_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 1], ["title", "asdadadasdasd"], ["content", "asdasdasdasdas"], ["created_at", "2018-07-03 14:23:10.179277"], ["updated_at", "2018-07-03 14:23:10.179277"], ["slug", "asdadadasdasd"], ["short_body", "asdadaasdad"], ["category_id", 1]]
+  [1m[35m (64.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/posts/asdadadasdasd
+Completed 302 Found in 76ms (ActiveRecord: 67.9ms)
+
+
+Started GET "/posts/asdadadasdasd" for 127.0.0.1 at 2018-07-03 17:23:10 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"asdadadasdasd"}
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."slug" = $1 LIMIT $2[0m  [["slug", "asdadadasdasd"], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered comments/_new.html.haml (7.7ms)
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 2]]
+  Rendered posts/show.html.haml within layouts/application (19.0ms)
+  Rendered shared/_header.html.haml (8.7ms)
+  Rendered shared/_footer.html.haml (1.7ms)
+Completed 200 OK in 101ms (Views: 94.6ms | ActiveRecord: 1.7ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2018-07-03 17:23:17 +0300
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"lf4ZzcdxG7ZLkhHcqH9IGUmdmeKya3h8srndSq7HnT/PiC+jYTrYdDP0sKbZ8dPq8rU88gzWbvEGEOyGRa00wg==", "post"=>{"title"=>"asda", "content"=>"asdasdasdasdasdsadadadada", "short_body"=>"asd", "category_id"=>"2"}, "commit"=>"Create Post"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPost Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "posts" WHERE ("posts"."id" IS NOT NULL) AND "posts"."slug" = $1 LIMIT $2[0m  [["slug", "asda"], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "posts" ("user_id", "title", "content", "created_at", "updated_at", "slug", "short_body", "category_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 1], ["title", "asda"], ["content", "asdasdasdasdasdsadadadada"], ["created_at", "2018-07-03 14:23:17.382444"], ["updated_at", "2018-07-03 14:23:17.382444"], ["slug", "asda"], ["short_body", "asd"], ["category_id", 2]]
+  [1m[35m (32.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/posts/asda
+Completed 302 Found in 42ms (ActiveRecord: 34.4ms)
+
+
+Started GET "/posts/asda" for 127.0.0.1 at 2018-07-03 17:23:17 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"asda"}
+  [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."slug" = $1 LIMIT $2[0m  [["slug", "asda"], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.haml within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered comments/_new.html.haml (4.2ms)
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 3]]
+  Rendered posts/show.html.haml within layouts/application (12.4ms)
+  Rendered shared/_header.html.haml (3.2ms)
+  Rendered shared/_footer.html.haml (1.3ms)
+Completed 200 OK in 66ms (Views: 60.1ms | ActiveRecord: 1.7ms)
+
+
+  [1m[36mPost Load (0.7ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  [1m[36mPost Load (0.9ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."title" = $1[0m  [["title", "asdadadasdasd"]]
+  [1m[36mPost Load (0.8ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."title" = $1[0m  [["title", "asdadadasdasd"]]
+  [1m[36mPost Load (0.8ms)[0m  [1m[34mSELECT "posts"."user_id" FROM "posts" WHERE "posts"."title" = $1[0m  [["title", "asdadadasdasd"]]
+  [1m[36mPost Load (0.7ms)[0m  [1m[34mSELECT user.user_name, post.title FROM "posts" INNER JOIN "users" ON "users"."id" = "posts"."user_id" WHERE "posts"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT  user.user_name, post.title FROM "posts" INNER JOIN "users" ON "users"."id" = "posts"."user_id" WHERE "posts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 11]]
+  [1m[36mPost Load (0.9ms)[0m  [1m[34mSELECT post.title FROM "posts" WHERE "posts"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT  post.title FROM "posts" WHERE "posts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 11]]
+  [1m[36mPost Load (0.7ms)[0m  [1m[34mSELECT "posts"."title" FROM "posts" WHERE "posts"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  [1m[36mPost Load (1.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts"."title" FROM "posts" WHERE "posts"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT "posts"."title" FROM "posts" WHERE "posts"."user_id" IS NULL[0m
+  [1m[36mPost Load (25.6ms)[0m  [1m[34mSELECT users.user_name FROM "posts" INNER JOIN "users" ON "users"."id" = "posts"."user_id" WHERE "posts"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mPost Load (0.7ms)[0m  [1m[34mSELECT user.user_name FROM "posts" INNER JOIN "users" ON "users"."id" = "posts"."user_id" WHERE "posts"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT  user.user_name FROM "posts" INNER JOIN "users" ON "users"."id" = "posts"."user_id" WHERE "posts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 11]]
+  [1m[36mPost Load (1.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" INNER JOIN "categories" ON "categories"."id" = "posts"."category_id"[0m
+  [1m[36mPost Load (1.7ms)[0m  [1m[34mSELECT "posts".* FROM "posts" INNER JOIN "categories" ON "categories"."id" = "posts"."category_id" WHERE (categories.category_name like 'Cars')[0m
+  [1m[36mPost Load (1.3ms)[0m  [1m[34mSELECT posts.short_body FROM "posts" INNER JOIN "categories" ON "categories"."id" = "posts"."category_id" WHERE (categories.category_name like 'Cars')[0m
+  [1m[36mPost Load (1.4ms)[0m  [1m[34mSELECT posts.short_body, posts.id FROM "posts" INNER JOIN "categories" ON "categories"."id" = "posts"."category_id" WHERE (categories.category_name like 'Cars')[0m
+  [1m[36mPost Load (1.3ms)[0m  [1m[34mSELECT posts.title from posts inner join categories on posts.category_id = categories.id where categories.category_name like '%Car%'[0m
+  [1m[36mCategory Load (38.1ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."category_name" = $1 LIMIT $2[0m  [["category_name", "category:add"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (80.5ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "category:add"], ["created_at", "2018-07-04 16:03:34.899761"], ["updated_at", "2018-07-04 16:03:34.899761"]]
+  [1m[35m (41.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."category_name" = $1 LIMIT $2[0m  [["category_name", "test"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "test"], ["created_at", "2018-07-04 16:03:35.026329"], ["updated_at", "2018-07-04 16:03:35.026329"]]
+  [1m[35m (6.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."category_name" = $1 LIMIT $2[0m  [["category_name", "category:add"], ["LIMIT", 1]]
+  [1m[35m (30.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "categories"[0m
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."category_name" = $1 LIMIT $2[0m  [["category_name", "category:add"], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."category_name" = $1 LIMIT $2[0m  [["category_name", "tester"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "tester"], ["created_at", "2018-07-04 16:06:58.075382"], ["updated_at", "2018-07-04 16:06:58.075382"]]
+  [1m[35m (15.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCategory Load (0.8ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."category_name" = $1 LIMIT $2[0m  [["category_name", "category:add"], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."category_name" = $1 LIMIT $2[0m  [["category_name", "category:add"], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."category_name" = $1 LIMIT $2[0m  [["category_name", "sdadada"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "sdadada"], ["created_at", "2018-07-04 16:12:52.381295"], ["updated_at", "2018-07-04 16:12:52.381295"]]
+  [1m[35m (19.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."category_name" = $1 LIMIT $2[0m  [["category_name", "category:add"], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."category_name" = $1 LIMIT $2[0m  [["category_name", "sdadada"], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."category_name" = $1 LIMIT $2[0m  [["category_name", "--trace"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "--trace"], ["created_at", "2018-07-04 16:13:08.683913"], ["updated_at", "2018-07-04 16:13:08.683913"]]
+  [1m[35m (16.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."category_name" = $1 LIMIT $2[0m  [["category_name", "category:add"], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."category_name" = $1 LIMIT $2[0m  [["category_name", "sdadadadsada"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "sdadadadsada"], ["created_at", "2018-07-04 16:31:42.724853"], ["updated_at", "2018-07-04 16:31:42.724853"]]
+  [1m[35m (26.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."category_name" = $1 LIMIT $2[0m  [["category_name", "category:add"], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."category_name" = $1 LIMIT $2[0m  [["category_name", "sdasddadasdaddasdada"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "sdasddadasdaddasdada"], ["created_at", "2018-07-04 16:34:19.791026"], ["updated_at", "2018-07-04 16:34:19.791026"]]
+  [1m[35m (13.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" ORDER BY "categories"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."category_name" = $1 LIMIT $2[0m  [["category_name", "category:add"], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."category_name" = $1 LIMIT $2[0m  [["category_name", "hellp"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "hellp"], ["created_at", "2018-07-04 16:47:55.866986"], ["updated_at", "2018-07-04 16:47:55.866986"]]
+  [1m[35m (20.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" ORDER BY "categories"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mCategory Load (0.8ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "category:custom"], ["created_at", "2018-07-04 17:03:00.871043"], ["updated_at", "2018-07-04 17:03:00.871043"]]
+  [1m[35m (24.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCategory Load (0.8ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" ORDER BY "categories"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "[\"category:custom\", \"cust\"]"], ["created_at", "2018-07-04 17:04:53.953816"], ["updated_at", "2018-07-04 17:04:53.953816"]]
+  [1m[35m (15.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "[\"category:custom\", \"cust\", \"--trace\"]"], ["created_at", "2018-07-04 17:05:04.989195"], ["updated_at", "2018-07-04 17:05:04.989195"]]
+  [1m[35m (19.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "[\"category:custom\", \"cust\"]"], ["created_at", "2018-07-04 17:05:31.941690"], ["updated_at", "2018-07-04 17:05:31.941690"]]
+  [1m[35m (20.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" ORDER BY "categories"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" ORDER BY "categories"."id" DESC LIMIT $1[0m  [["LIMIT", 3]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "{#namee}"], ["created_at", "2018-07-04 17:10:08.080487"], ["updated_at", "2018-07-04 17:10:08.080487"]]
+  [1m[35m (28.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "category:custom"], ["created_at", "2018-07-04 17:10:36.267939"], ["updated_at", "2018-07-04 17:10:36.267939"]]
+  [1m[35m (15.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (42.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (52.8ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (518.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "nevs_blog_development"[0m
+  [1m[35m (333.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "nevs_blog_test"[0m
+  [1m[35m (1700.6ms)[0m  [1m[35mCREATE DATABASE "nevs_blog_development" ENCODING = 'unicode'[0m
+  [1m[35m (998.9ms)[0m  [1m[35mCREATE DATABASE "nevs_blog_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "categories" CASCADE[0m
+  [1m[35m (134.4ms)[0m  [1m[35mCREATE TABLE "categories" ("id" bigserial primary key, "category_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (62.4ms)[0m  [1m[35mCREATE  INDEX  "index_categories_on_category_name" ON "categories"  ("category_name")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "comments" CASCADE[0m
+  [1m[35m (109.6ms)[0m  [1m[35mCREATE TABLE "comments" ("id" bigserial primary key, "user_id" integer, "post_id" integer, "content" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "friendly_id_slugs" CASCADE[0m
+  [1m[35m (121.4ms)[0m  [1m[35mCREATE TABLE "friendly_id_slugs" ("id" serial NOT NULL PRIMARY KEY, "slug" character varying NOT NULL, "sluggable_id" integer NOT NULL, "sluggable_type" character varying(50), "scope" character varying, "created_at" timestamp)[0m
+  [1m[35m (63.5ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope" ON "friendly_id_slugs"  ("slug", "sluggable_type", "scope")[0m
+  [1m[35m (64.1ms)[0m  [1m[35mCREATE  INDEX  "index_friendly_id_slugs_on_slug_and_sluggable_type" ON "friendly_id_slugs"  ("slug", "sluggable_type")[0m
+  [1m[35m (74.8ms)[0m  [1m[35mCREATE  INDEX  "index_friendly_id_slugs_on_sluggable_id" ON "friendly_id_slugs"  ("sluggable_id")[0m
+  [1m[35m (63.9ms)[0m  [1m[35mCREATE  INDEX  "index_friendly_id_slugs_on_sluggable_type" ON "friendly_id_slugs"  ("sluggable_type")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "posts" CASCADE[0m
+  [1m[35m (109.2ms)[0m  [1m[35mCREATE TABLE "posts" ("id" bigserial primary key, "user_id" integer, "title" character varying, "content" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "image" character varying, "slug" character varying, "short_body" character varying, "category_id" integer)[0m
+  [1m[35m (63.7ms)[0m  [1m[35mCREATE  INDEX  "index_posts_on_title" ON "posts"  ("title")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (107.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "user_name" character varying NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (63.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (63.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35m (10.4ms)[0m  [1m[35mALTER TABLE "posts" ADD CONSTRAINT "fk_rails_9b1b26f040"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+[0m
+  [1m[35m (10.9ms)[0m  [1m[35mALTER TABLE "posts" ADD CONSTRAINT "fk_rails_5b5ddfd518"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (120.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (8.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20180702140220)[0m
+  [1m[35m (10.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20180614103237),
+(20180617182357),
+(20180630083525),
+(20180629173456),
+(20180628193234),
+(20180614100953),
+(20180629174840);
+
+[0m
+  [1m[35m (109.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-07-04 17:11:06.936809"], ["updated_at", "2018-07-04 17:11:06.936809"]]
+  [1m[35m (7.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "categories" CASCADE[0m
+  [1m[35m (124.8ms)[0m  [1m[35mCREATE TABLE "categories" ("id" bigserial primary key, "category_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (73.8ms)[0m  [1m[35mCREATE  INDEX  "index_categories_on_category_name" ON "categories"  ("category_name")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "comments" CASCADE[0m
+  [1m[35m (120.5ms)[0m  [1m[35mCREATE TABLE "comments" ("id" bigserial primary key, "user_id" integer, "post_id" integer, "content" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "friendly_id_slugs" CASCADE[0m
+  [1m[35m (119.9ms)[0m  [1m[35mCREATE TABLE "friendly_id_slugs" ("id" serial NOT NULL PRIMARY KEY, "slug" character varying NOT NULL, "sluggable_id" integer NOT NULL, "sluggable_type" character varying(50), "scope" character varying, "created_at" timestamp)[0m
+  [1m[35m (63.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope" ON "friendly_id_slugs"  ("slug", "sluggable_type", "scope")[0m
+  [1m[35m (74.3ms)[0m  [1m[35mCREATE  INDEX  "index_friendly_id_slugs_on_slug_and_sluggable_type" ON "friendly_id_slugs"  ("slug", "sluggable_type")[0m
+  [1m[35m (75.3ms)[0m  [1m[35mCREATE  INDEX  "index_friendly_id_slugs_on_sluggable_id" ON "friendly_id_slugs"  ("sluggable_id")[0m
+  [1m[35m (63.1ms)[0m  [1m[35mCREATE  INDEX  "index_friendly_id_slugs_on_sluggable_type" ON "friendly_id_slugs"  ("sluggable_type")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "posts" CASCADE[0m
+  [1m[35m (108.9ms)[0m  [1m[35mCREATE TABLE "posts" ("id" bigserial primary key, "user_id" integer, "title" character varying, "content" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "image" character varying, "slug" character varying, "short_body" character varying, "category_id" integer)[0m
+  [1m[35m (85.6ms)[0m  [1m[35mCREATE  INDEX  "index_posts_on_title" ON "posts"  ("title")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (109.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "user_name" character varying NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (74.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (62.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mALTER TABLE "posts" ADD CONSTRAINT "fk_rails_9b1b26f040"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+[0m
+  [1m[35m (10.6ms)[0m  [1m[35mALTER TABLE "posts" ADD CONSTRAINT "fk_rails_5b5ddfd518"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (119.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (8.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20180702140220)[0m
+  [1m[35m (10.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20180614103237),
+(20180617182357),
+(20180630083525),
+(20180629173456),
+(20180628193234),
+(20180614100953),
+(20180629174840);
+
+[0m
+  [1m[35m (120.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-07-04 17:11:08.453431"], ["updated_at", "2018-07-04 17:11:08.453431"]]
+  [1m[35m (5.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2018-07-04 17:11:08.463381"], ["key", "environment"]]
+  [1m[35m (6.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "Cars"], ["created_at", "2018-07-04 17:11:08.538456"], ["updated_at", "2018-07-04 17:11:08.538456"]]
+  [1m[35m (19.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "Technologies"], ["created_at", "2018-07-04 17:11:08.560582"], ["updated_at", "2018-07-04 17:11:08.560582"]]
+  [1m[35m (8.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "Othher"], ["created_at", "2018-07-04 17:11:08.571530"], ["updated_at", "2018-07-04 17:11:08.571530"]]
+  [1m[35m (8.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "tesst"], ["created_at", "2018-07-04 17:11:36.392810"], ["updated_at", "2018-07-04 17:11:36.392810"]]
+  [1m[35m (19.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" ORDER BY "categories"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" ORDER BY "categories"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" ORDER BY "categories"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "sad"], ["created_at", "2018-07-04 17:34:48.247475"], ["updated_at", "2018-07-04 17:34:48.247475"]]
+  [1m[35m (22.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "sads"], ["created_at", "2018-07-04 17:35:12.440169"], ["updated_at", "2018-07-04 17:35:12.440169"]]
+  [1m[35m (22.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" ORDER BY "categories"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" ORDER BY "categories"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" ORDER BY "categories"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."category_name" = $1 LIMIT $2[0m  [["category_name", "sads"], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" ORDER BY "categories"."id" DESC LIMIT $1[0m  [["LIMIT", 2]]
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."category_name" = $1 LIMIT $2[0m  [["category_name", "sads"], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" ORDER BY "categories"."id" DESC LIMIT $1[0m  [["LIMIT", 2]]
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."category_name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."category_name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."category_name" = $1 LIMIT $2[0m  [["category_name", "asdasd"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "asdasd"], ["created_at", "2018-07-04 18:07:15.051977"], ["updated_at", "2018-07-04 18:07:15.051977"]]
+  [1m[35m (28.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."category_name" = $1 LIMIT $2[0m  [["category_name", "test_task"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "categories" ("category_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category_name", "test_task"], ["created_at", "2018-07-04 18:10:59.860400"], ["updated_at", "2018-07-04 18:10:59.860400"]]
+  [1m[35m (35.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" ORDER BY "categories"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]

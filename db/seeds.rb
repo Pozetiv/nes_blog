@@ -1,3 +1,3 @@
-Role.create( role_name: 'Writter' )
-Role.create( role_name: 'Reader' )
-Role.create( role_name: 'Admin' )
+Category.create(category_name: "Cars")
+Category.create(category_name: "Technologies")
+Category.create(category_name: "Othher")
