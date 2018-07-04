@@ -32,7 +32,7 @@ class PostsController < ApplicationController
     end
 
     def show
-      @comments = @post.comments.all
+      @comments = @post.comments.all.page params[:page]
       @comment = current_user.comments.new
     end
 

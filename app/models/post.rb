@@ -11,5 +11,10 @@ class Post < ApplicationRecord
   validates :content, :title, :short_body, presence: true, length: {minimum: 2}
   validates :category_id, presence: true
 
+  default_scope -> { order(created_at: :desc) }
+
+  def published
+    created_at.to_date.strftime("%d %B, %Y")
+  end
 
 end
