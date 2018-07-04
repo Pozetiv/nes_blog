@@ -3,6 +3,5 @@ namespace :category do
 
   task :add, [:val] => [:environment] do |task, args|
     Category.find_or_create_by(category_name: args[:val])
-    binding.pry
   end
 end

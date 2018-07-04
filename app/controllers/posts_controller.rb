@@ -32,7 +32,7 @@ class PostsController < ApplicationController
     end
 
     def show
-      @comments = @post.comments.all
+      @comments = @post.comments.all.page params[:page]
       @comment = current_user.comments.new
     end
 
@@ -42,6 +42,11 @@ class PostsController < ApplicationController
       else
         redirect_to posts_path, warning: 'Opps cant destroy this post'
       end
+    end
+
+    def add_to_favorite
+      @post = Post.friendly.find(params[:post_id])
+      redirect_to @post if current_user.favorite(@post)
     end
 
     private

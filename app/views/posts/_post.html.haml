@@ -1,9 +1,11 @@
 .col-md-4
-  .cust_card
-    .cust_card_title
+  .card#custom_card
+    .card-header#custom_card_header
       %h3= link_to post.title, post_path(post)
-      %h5= 'Published by '+ "#{post.user.user_name}" +' at the ' + "#{post.created_at.to_date.strftime("%d %B, %Y") }"
-      =link_to(image_tag(post.image.url(:small), class: 'card-img-top' ), post_path(post)) if post.image?
-    .cust_card_body
-      %p=post.short_body
-      =link_to "Read", post_path(post), class: 'btn btn-success'
+      %h5= 'Published by '+ "#{post.user.user_name}" +' at the ' + "#{post.published}"
+    #custom_card_img
+      =link_to(image_tag(post.image.url(:big), class: 'mx-auto d-block img-fluid' ), post_path(post)) if post.image?
+    .card_body#custom_card_body
+      %p.card-text=post.short_body
+    .card_footer#custom_card_footer
+      =link_to "Read", post_path(post), class: 'btn btn-light btn-lg btn-block'
