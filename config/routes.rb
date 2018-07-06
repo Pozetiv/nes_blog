@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   #
    resources :posts do
      resources :comments
+     get '/add_to_favorite', to: 'posts#add_to_favorite'
    end
 
 

@@ -4,7 +4,7 @@
       %h3= link_to post.title, post_path(post)
       %h5= 'Published by '+ "#{post.user.user_name}" +' at the ' + "#{post.published}"
     #custom_card_img
-      =link_to(image_tag(post.image.url(:small), class: 'mx-auto d-block img-fluid' ), post_path(post)) if post.image?
+      =link_to(image_tag(post.image.url(:big), class: 'mx-auto d-block img-fluid' ), post_path(post)) if post.image?
     .card_body#custom_card_body
       %p.card-text=post.short_body
     .card_footer#custom_card_footer

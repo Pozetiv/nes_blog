@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   belongs_to :user
   belongs_to :category
   has_many :comments, dependent: :destroy
+  acts_as_favoritable
 
   mount_uploader :image, ImageUploader
   friendly_id :title, use: :slugged

@@ -9,6 +9,7 @@ show actions
         =image_tag @post.image.url(:big),class: 'post_image img-fluid' if @post.image?
         =@post.content
       .post_footer
+        =link_to 'Add to favorite', post_add_to_favorite_path(@post), class: 'btn btn-outline-success'
         ='Published ' "#{@post.published}"
         -if user_signed_in? && current_user == @post.user
           =link_to 'Edite post', edit_post_path(@post), class: 'btn btn-primary btn-sm'

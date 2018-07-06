@@ -44,6 +44,11 @@ class PostsController < ApplicationController
       end
     end
 
+    def add_to_favorite
+      @post = Post.friendly.find(params[:post_id])
+      redirect_to @post if current_user.favorite(@post)
+    end
+
     private
 
     def find_post
