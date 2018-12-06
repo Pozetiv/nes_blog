@@ -1,0 +1,34 @@
+show actions
+-provide(:title, "#{@post.short_body}")
+.row.justify-content-md-center
+  .col-8
+    .post
+      .post_header
+        =link_to @post.user.user_name, "#"
+      .post_body
+        =image_tag @post.image.url(:big),class: 'post_image img-fluid' if @post.image?
+        =@post.content
+      .post_footer
+        =link_to 'Add to favorite', post_add_to_favorite_path(@post), class: 'btn btn-outline-success'
+        ='Published ' "#{@post.published}"
+        -if user_signed_in? && current_user == @post.user
+          =link_to 'Edite post', edit_post_path(@post), class: 'btn btn-primary btn-sm'
+          =link_to 'Delete post', post_path(@post), method: :delete, class: 'btn btn-outline-danger btn-sm'
+
+
+
+      %h1 Comments
+
+      =render "comments/new"
+
+      -@comments.each do |comment|
+        .coment
+          .coment_header
+            %h3=comment.user.user_name
+          .comment_body
+            =comment.content
+          -if user_signed_in? && comment.user_id = current_user.id
+            .comment_footer
+              =link_to "Edit commment", edit_post_comment_path(comment.post, comment), class: 'badge badge-light'
+              =link_to "Delete commment", post_comment_path(comment.post, comment), method: :delete, confirm: {data: 'Do you want delete comment'}, class: 'badge badge-danger'
+      =paginate @comments
